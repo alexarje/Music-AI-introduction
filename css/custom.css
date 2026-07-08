@@ -1,0 +1,448 @@
+/* ============================================================
+   Music AI Introduction — Custom Reveal.js Theme Extension
+   ============================================================ */
+
+:root {
+  --primary:    #7c3aed;
+  --secondary:  #06b6d4;
+  --accent:     #f97316;
+  --success:    #10b981;
+  --danger:     #ef4444;
+  --bg-dark:    #0f0a1e;
+  --bg-card:    #1e1b4b;
+  --text-main:  #e2e8f0;
+  --text-muted: #94a3b8;
+  --white-key:  #f8fafc;
+  --black-key:  #1e293b;
+  --key-pressed-user: #7c3aed;
+  --key-pressed-chord: #06b6d4;
+  --key-pressed-neural: #f97316;
+  --key-pressed-evo: #10b981;
+}
+
+/* ---- Body ---- */
+.reveal-viewport { background: var(--bg-dark); }
+
+.reveal .slides section {
+  text-align: left;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  text-transform: none;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.reveal h1 { font-size: 2.2em; }
+.reveal h2 { font-size: 1.6em; color: var(--secondary); }
+.reveal h3 { font-size: 1.2em; color: var(--accent); }
+
+.reveal .slides section.title-slide { text-align: center; }
+
+/* ---- Badges / Tags ---- */
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.7em;
+  border-radius: 999px;
+  font-size: 0.65em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0.2em;
+  vertical-align: middle;
+}
+.badge-rule    { background: #4c1d95; color: #ddd6fe; }
+.badge-neural  { background: #7c2d12; color: #fed7aa; }
+.badge-evo     { background: #064e3b; color: #a7f3d0; }
+.badge-demo    { background: #1e3a5f; color: #93c5fd; }
+
+/* ---- Section header slides ---- */
+.section-header { text-align: center; }
+.section-header .section-number {
+  font-size: 5em;
+  opacity: 0.12;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: -0.2em;
+}
+.section-header h2 { font-size: 2em; }
+
+/* ---- Two-column layout ---- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+  align-items: start;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+  align-items: start;
+}
+
+/* ---- Comparison Table ---- */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8em;
+}
+.comparison-table th {
+  background: var(--bg-card);
+  padding: 0.5em 0.8em;
+  text-align: center;
+  border: 1px solid #334155;
+}
+.comparison-table td {
+  padding: 0.4em 0.8em;
+  border: 1px solid #1e293b;
+  text-align: center;
+}
+.comparison-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+.check { color: var(--success); font-size: 1.2em; }
+.cross { color: var(--danger);  font-size: 1.2em; }
+.partial { color: var(--accent); font-size: 1.2em; }
+
+/* ---- Info Cards ---- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid #312e81;
+  border-radius: 0.75em;
+  padding: 1em 1.2em;
+  margin: 0.5em 0;
+}
+.card h4 { margin: 0 0 0.4em; font-size: 0.95em; color: var(--secondary); }
+.card p  { margin: 0; font-size: 0.8em; color: var(--text-muted); line-height: 1.5; }
+
+/* ---- Timeline ---- */
+.timeline { list-style: none; padding: 0; margin: 0; }
+.timeline li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8em;
+  margin-bottom: 0.6em;
+  font-size: 0.82em;
+}
+.timeline li .year {
+  min-width: 3em;
+  font-weight: 700;
+  color: var(--accent);
+}
+.timeline li .event { color: var(--text-muted); }
+.timeline li .event strong { color: var(--text-main); }
+
+/* ================================================================
+   Piano Keyboard Component
+   ================================================================ */
+.piano-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8em;
+  margin: 0.8em 0;
+}
+
+.piano-keyboard {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  border-radius: 0 0 6px 6px;
+  overflow: visible;
+}
+
+.piano-key {
+  position: absolute;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.05s ease;
+}
+.piano-key:active { filter: brightness(0.85); }
+
+.white-key {
+  background: var(--white-key);
+  border: 1px solid #94a3b8;
+  z-index: 1;
+}
+.white-key.pressed { background: var(--key-pressed-user) !important; }
+
+.black-key {
+  background: var(--black-key);
+  border: 1px solid #0f172a;
+  z-index: 2;
+}
+.black-key.pressed { background: var(--key-pressed-user) !important; }
+
+.key-label {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: #64748b;
+  pointer-events: none;
+  font-family: monospace;
+}
+
+/* ================================================================
+   Demo Panels
+   ================================================================ */
+.demo-panel {
+  background: #0d0d1e;
+  border: 1px solid #312e81;
+  border-radius: 0.75em;
+  padding: 1em 1.2em;
+  font-size: 0.85em;
+}
+
+.demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+.demo-controls select,
+.demo-controls input {
+  background: var(--bg-card);
+  border: 1px solid #4338ca;
+  color: var(--text-main);
+  padding: 0.3em 0.5em;
+  border-radius: 0.4em;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.4em 0.9em;
+  border: none;
+  border-radius: 0.4em;
+  font-size: 0.85em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  letter-spacing: 0.02em;
+}
+.btn:hover  { opacity: 0.85; }
+.btn:active { transform: scale(0.96); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary  { background: var(--primary);   color: #fff; }
+.btn-info     { background: var(--secondary); color: #0f172a; }
+.btn-warning  { background: var(--accent);    color: #fff; }
+.btn-success  { background: var(--success);   color: #fff; }
+.btn-danger   { background: var(--danger);    color: #fff; }
+.btn-outline  {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+.btn-sm { padding: 0.25em 0.6em; font-size: 0.78em; }
+
+/* Status / chord display */
+.status-line {
+  font-size: 0.82em;
+  color: var(--text-muted);
+  min-height: 1.4em;
+  padding: 0.3em 0;
+}
+
+.chord-display {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: var(--secondary);
+  min-height: 1.6em;
+  padding: 0.2em 0;
+  letter-spacing: -0.01em;
+}
+
+.legend {
+  display: flex;
+  gap: 0.8em;
+  flex-wrap: wrap;
+  font-size: 0.72em;
+  color: var(--text-muted);
+  margin-top: 0.4em;
+}
+.legend-item { display: flex; align-items: center; gap: 0.3em; }
+.legend-dot  {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ================================================================
+   Neural Demo
+   ================================================================ */
+.seed-notes-display {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  min-height: 28px;
+  padding: 4px 6px;
+  background: #0a0a18;
+  border-radius: 4px;
+  border: 1px solid #1e293b;
+  margin: 0.4em 0;
+}
+.seed-note-chip {
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.generated-note-chip {
+  background: #6d28d9;
+  color: #fff;
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Loading spinner */
+.spinner {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: var(--secondary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ================================================================
+   Evolutionary Demo
+   ================================================================ */
+.evo-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+}
+.evo-stat-card {
+  background: var(--bg-card);
+  border-radius: 0.5em;
+  padding: 0.4em 0.6em;
+  text-align: center;
+  border: 1px solid #312e81;
+}
+.evo-stat-card .stat-value {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: var(--success);
+}
+.evo-stat-card .stat-label {
+  font-size: 0.65em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+canvas.evo-canvas {
+  width: 100%;
+  border-radius: 4px;
+  background: #0a0a18;
+  margin: 0.3em 0;
+  display: block;
+}
+
+/* ================================================================
+   Markov Demo
+   ================================================================ */
+.markov-display {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  min-height: 28px;
+  padding: 4px 6px;
+  background: #0a0a18;
+  border-radius: 4px;
+  border: 1px solid #1e293b;
+  margin: 0.4em 0;
+  font-family: monospace;
+  font-size: 0.8em;
+}
+.markov-note { color: var(--secondary); font-weight: 700; }
+.markov-gen  { color: #f97316; font-weight: 700; }
+
+/* ================================================================
+   Keyboard shortcut overlay
+   ================================================================ */
+.kb-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.3em;
+  font-size: 0.7em;
+  color: var(--text-muted);
+}
+.kb-shortcuts kbd {
+  background: #334155;
+  border: 1px solid #475569;
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-family: monospace;
+  color: #e2e8f0;
+}
+
+/* ================================================================
+   MIDI Status indicator
+   ================================================================ */
+#midi-status-bar {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  font-size: 0.65em;
+  color: var(--text-muted);
+  background: rgba(15,10,30,0.85);
+  padding: 0.3em 0.7em;
+  border-radius: 999px;
+  border: 1px solid #312e81;
+  z-index: 100;
+  pointer-events: none;
+}
+#midi-status-bar .dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.dot-connected { background: var(--success); }
+.dot-disconnected { background: var(--danger); }
+
+/* ================================================================
+   Progress bar override
+   ================================================================ */
+.reveal .progress { height: 3px; }
+.reveal .progress span { background: var(--primary); }
+
+/* ================================================================
+   Highlight / code blocks
+   ================================================================ */
+.reveal pre code {
+  font-size: 0.78em;
+  line-height: 1.5;
+}
+
+/* Tone down default reveal link color */
+.reveal a { color: var(--secondary); }
+.reveal a:hover { color: #67e8f9; }
+
+/* ================================================================
+   Responsive / small display tweaks
+   ================================================================ */
+@media (max-width: 900px) {
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .piano-keyboard { transform: scale(0.75); transform-origin: top center; }
+}
