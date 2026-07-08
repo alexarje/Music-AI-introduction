@@ -42,6 +42,13 @@
     body:not(.dark-theme) .theme-toggle:focus-visible {
       outline-color: rgba(0, 0, 0, 0.9);
     }
+
+    .theme-toggle--floating {
+      position: fixed;
+      top: 0.75em;
+      right: 0.75em;
+      z-index: 10000;
+    }
   </style>
 </head>
 <body>
@@ -52,16 +59,16 @@
 <div id="midi-status-bar">
   <span class="dot dot-disconnected"></span>
   <span class="midi-label">MIDI: not connected</span>
-  <button
-    class="theme-toggle"
-    id="theme-toggle"
-    type="button"
-    aria-label="Toggle theme"
-    style="margin-left:auto"
-  >
-    Toggle theme
-  </button>
 </div>
+
+<button
+  class="theme-toggle theme-toggle--floating"
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle theme"
+>
+  Toggle theme
+</button>
 
 <!-- =========================================================
      PRESENTATION
