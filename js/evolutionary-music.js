@@ -261,6 +261,10 @@ class EvolutionaryComposer {
     this.playMelody(this.best, noteLen);
   }
 
+  getExportMelody() {
+    return this.best ? [...this.best] : [];
+  }
+
   playMelody(mel, noteLen = 0.32) {
     const endTime = this.audio.playSequence(mel, noteLen, 0.04, 0.08);
     mel.forEach((n, i) => {

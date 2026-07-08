@@ -453,5 +453,45 @@ canvas.evo-canvas {
    ================================================================ */
 @media (max-width: 900px) {
   .two-col, .three-col { grid-template-columns: 1fr; }
-  .piano-keyboard { transform: scale(0.75); transform-origin: top center; }
+  .piano-wrapper { overflow-x: auto; max-width: 100%; }
+  .demo-controls { gap: 0.35em; }
+  .reveal .slides section { padding: 0.4em; }
+}
+
+@media (max-width: 640px) {
+  .floating-control { font-size: 0.65rem; padding: 0.3rem 0.5rem; }
+  .floating-control--out { left: 4rem; }
+  .floating-control--mic { left: 7.25rem; }
+  .floating-control--kill { top: 2.6em; left: 0.75em; }
+  .floating-control--right { top: 0.75em; right: 0.75em; }
+
+  .genie-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5em;
+  }
+  .genie-btn {
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 1rem;
+  }
+
+  .piano-keyboard {
+    transform-origin: top left;
+  }
+  .white-key {
+    min-width: 44px !important;
+  }
+}
+
+.genie-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: center;
+}
+.genie-btn {
+  min-width: 48px;
+  min-height: 48px;
+  font-weight: 700;
 }

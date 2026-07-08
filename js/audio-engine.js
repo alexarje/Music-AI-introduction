@@ -51,12 +51,14 @@ class AudioEngine {
       velocity / 127
     );
     this._held.add(midiNote);
+    this.midiOut?.sendNoteOn(midiNote, velocity);
   }
 
   noteOff(midiNote) {
     if (!this._held.has(midiNote)) return;
     this.synth.triggerRelease(AudioEngine.midiToFreq(midiNote), Tone.now());
     this._held.delete(midiNote);
+    this.midiOut?.sendNoteOff(midiNote);
   }
 
   /** Play a set of MIDI notes for a given Tone.js duration string. */
@@ -90,6 +92,7 @@ class AudioEngine {
   /** Stop all sounding notes and clear held state. */
   killAll() {
     this.synth.releaseAll();
+    this._held.forEach(n => this.midiOut?.sendNoteOff(n));
     this._held.clear();
   }
 }

@@ -24,6 +24,8 @@ class PianoKeyboard {
 
     this._buildKeyboard();
     this._bindPointerEvents();
+    this._scaleToFit();
+    window.addEventListener('resize', () => this._scaleToFit());
   }
 
   /* ------------------------------------------------------------------ */
@@ -167,5 +169,22 @@ class PianoKeyboard {
 
   releaseAll() {
     Object.keys(this.keys).forEach(n => this.releaseKey(parseInt(n, 10)));
+  }
+
+  _scaleToFit() {
+    if (!this.container) return;
+    const parent = this.container.parentElement;
+    const kbW = parseInt(this.container.style.width, 10);
+    if (!parent || !kbW) return;
+    const maxW = parent.clientWidth - 8;
+    if (kbW > maxW) {
+      const scale = maxW / kbW;
+      this.container.style.transform = `scale(${scale})`;
+      this.container.style.transformOrigin = 'top center';
+      parent.style.minHeight = `${parseInt(this.container.style.height, 10) * scale + 8}px`;
+    } else {
+      this.container.style.transform = '';
+      parent.style.minHeight = '';
+    }
   }
 }

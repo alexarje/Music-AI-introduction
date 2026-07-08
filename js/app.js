@@ -9,10 +9,12 @@
 /* Globals (set after DOMContentLoaded)                                 */
 /* ------------------------------------------------------------------ */
 let audio, midi, kbFallback;
+let pitchDetector;
 let harmonizer, pianoRB;
 let counterpoint, pianoCP;
 let markov,     pianoMK;
 let neural,     pianoNN;
+let pianoGenie, pianoPG;
 let evo;
 
 /* ------------------------------------------------------------------ */
@@ -30,11 +32,15 @@ function killAll() {
   pianoCP?.releaseAll();
   pianoMK?.releaseAll();
   pianoNN?.releaseAll();
+  pianoPG?.releaseAll();
   markov?.kill();
   neural?.kill();
   counterpoint?.kill();
   evo?.kill();
+  pitchDetector?.stop();
   kbFallback?.releaseAllHeld();
+  const micBtn = document.getElementById('mic-btn');
+  if (micBtn) micBtn.textContent = 'MIC';
 
   const mkRecord = document.getElementById('mk-record');
   const mkStop = document.getElementById('mk-stop');
@@ -65,7 +71,7 @@ function killAll() {
 /* Demo activation (called on slide-change)                             */
 /* ------------------------------------------------------------------ */
 
-let activeDemo = null;   // 'rule-based' | 'counterpoint' | 'markov' | 'neural' | 'evo' | null
+let activeDemo = null;   // 'rule-based' | 'counterpoint' | 'markov' | 'neural' | 'piano-genie' | 'evo' | null
 
 function activateDemo(name) {
   if (activeDemo === name) return;
@@ -101,6 +107,11 @@ function activateDemo(name) {
     midi.onNoteOff(n     => neural.noteOff(n));
     pianoNN.onNoteOn  = (n, v) => { unlockAudio(); neural.noteOn(n, v); };
     pianoNN.onNoteOff =  n     => neural.noteOff(n);
+  }
+
+  if (name === 'piano-genie') {
+    midi.onNoteOn  = () => {};
+    midi.onNoteOff = () => {};
   }
 
   if (name === 'evo') {
@@ -179,6 +190,16 @@ function bindButtons() {
     unlockAudio();
     counterpoint.playBoth(0.32);
   });
+  const cpMidi = document.getElementById('cp-midi');
+  if (cpMidi) cpMidi.addEventListener('click', () => {
+    const { cantus, counter } = counterpoint.getExportVoices();
+    if (!cantus.length) return;
+    if (!counter.length) {
+      MidiExport.download('cantus-firmus.mid', cantus, 0.32);
+    } else {
+      MidiExport.downloadDual('counterpoint.mid', cantus, counter, 0.32);
+    }
+  });
 
   /* ---- Markov ---- */
   const mkRecord  = document.getElementById('mk-record');
@@ -206,6 +227,12 @@ function bindButtons() {
   if (mkBach) mkBach.addEventListener('click', () => {
     unlockAudio();
     markov.playBachSeed();
+  });
+  const mkMidi = document.getElementById('mk-midi');
+  if (mkMidi) mkMidi.addEventListener('click', () => {
+    const notes = markov.getExportMelody();
+    if (!notes.length) return;
+    MidiExport.download('markov-melody.mid', notes, 0.3);
   });
 
   /* ---- Neural ---- */
@@ -246,6 +273,24 @@ function bindButtons() {
     unlockAudio();
     neural.loadBachSeed();
   });
+  const nnMidi = document.getElementById('nn-midi');
+  if (nnMidi) nnMidi.addEventListener('click', () => {
+    const notes = neural.getExportMelody();
+    if (!notes.length) return;
+    MidiExport.download('neural-melody.mid', notes, 0.35);
+  });
+
+  /* ---- Piano Genie ---- */
+  document.querySelectorAll('.genie-btn').forEach((btn) => {
+    const idx = parseInt(btn.dataset.btn, 10);
+    btn.addEventListener('mousedown', () => { unlockAudio(); pianoGenie.pressButton(idx); });
+    btn.addEventListener('mouseup', () => pianoGenie.releaseButton(idx));
+    btn.addEventListener('mouseleave', () => pianoGenie.releaseButton(idx));
+    btn.addEventListener('touchstart', (e) => { e.preventDefault(); unlockAudio(); pianoGenie.pressButton(idx); }, { passive: false });
+    btn.addEventListener('touchend', (e) => { e.preventDefault(); pianoGenie.releaseButton(idx); }, { passive: false });
+  });
+  const pgReset = document.getElementById('pg-reset');
+  if (pgReset) pgReset.addEventListener('click', () => pianoGenie.reset());
 
   /* ---- Evolutionary ---- */
   const evoStart  = document.getElementById('evo-start');
@@ -279,6 +324,21 @@ function bindButtons() {
     unlockAudio();
     evo.playBest(0.3);
   });
+  const evoMidi = document.getElementById('evo-midi');
+  if (evoMidi) evoMidi.addEventListener('click', () => {
+    const notes = evo.getExportMelody();
+    if (!notes.length) return;
+    MidiExport.download('evolved-melody.mid', notes, 0.32);
+  });
+
+  const micBtn = document.getElementById('mic-btn');
+  if (micBtn) {
+    micBtn.addEventListener('click', async () => {
+      unlockAudio();
+      const on = await pitchDetector.toggle();
+      micBtn.textContent = on ? 'MIC ✓' : 'MIC';
+    });
+  }
 
   const killBtn = document.getElementById('kill-all-btn');
   if (killBtn) killBtn.addEventListener('click', killAll);
@@ -382,11 +442,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- Core services ---- */
   audio     = new AudioEngine();
   midi      = new MIDIHandler();
+  audio.midiOut = midi;
   midi.bindStatusButton();
+  pitchDetector = new PitchDetector(midi);
   kbFallback= new KeyboardInputFallback(midi);
   kbFallback.enable();
 
   const midiOk = await midi.init();
+  midi._updateOutputButton();
   if (!midiOk) {
     console.info('[App] No MIDI device — using keyboard fallback (Z=C4)');
   }
@@ -407,6 +470,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- Neural demo ---- */
   pianoNN   = new PianoKeyboard('piano-nn', { startNote: 48, endNote: 84 });
   neural    = new NeuralMusicDemo(audio, pianoNN);
+
+  /* ---- Piano Genie demo ---- */
+  pianoPG = new PianoKeyboard('piano-pg', { startNote: 48, endNote: 84 });
+  pianoGenie = new PianoGenieDemo(audio);
+  pianoGenie.setPiano(pianoPG);
 
   /* ---- Evolutionary demo ---- */
   evo = new EvolutionaryComposer(audio);

@@ -12,6 +12,7 @@ class MarkovMusicGenerator {
     this.notes  = [];      // recorded seed notes
     this.recording = false;
     this._timers = [];
+    this.lastExportMelody = [];
 
     // ---------------------------------------------------------------
     // First-order Markov transition table derived from Bach BWV 846.
@@ -138,6 +139,7 @@ class MarkovMusicGenerator {
   playGenerated() {
     this._clearTimers();
     const melody = this.generate(this.notes, 24);
+    this.lastExportMelody = melody;
     this._showMelody(this.notes, melody.slice(this.notes.length));
     const endTime = this.audio.playSequence(melody, 0.3, 0.04, 0.1);
     this._setStatus('▶ Playing Markov continuation…');
@@ -153,6 +155,7 @@ class MarkovMusicGenerator {
   playBachSeed() {
     this._clearTimers();
     this.notes = [];
+    this.lastExportMelody = [...this.BACH_SEED];
     this.audio.playSequence(this.BACH_SEED, 0.25, 0.03, 0.1);
     this.BACH_SEED.forEach((n, i) => {
       this._schedule(() => this.piano?.pressKey(n, '#f97316'), i * 250 + 100);
@@ -160,6 +163,10 @@ class MarkovMusicGenerator {
     });
     this._setStatus('Playing Bach C-Major Prelude seed (16 notes)…');
     this._showMelody(this.BACH_SEED, []);
+  }
+
+  getExportMelody() {
+    return this.lastExportMelody.length ? this.lastExportMelody : this.notes;
   }
 
   /* ------------------------------------------------------------------ */

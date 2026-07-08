@@ -217,4 +217,8 @@ class SpeciesCounterpoint {
     const el = document.getElementById('cp-status');
     if (el) el.textContent = msg;
   }
+
+  getExportVoices() {
+    return { cantus: [...this.cantus], counter: [...this.counter] };
+  }
 }

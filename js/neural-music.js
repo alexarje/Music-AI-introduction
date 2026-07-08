@@ -17,6 +17,7 @@ class NeuralMusicDemo {
     this.seed      = [];   // { pitch, startTime, endTime }
     this.seedStep  = 0;    // next start time (in steps of 0.5s)
     this._timers   = [];
+    this.lastExportMelody = [];
 
     // Magenta checkpoint — hosted by Google, requires internet
     this.CHECKPOINT_URL =
@@ -144,6 +145,7 @@ class NeuralMusicDemo {
 
   _playContinuation(notes) {
     this._clearTimers();
+    this.lastExportMelody = notes.map(n => n.pitch);
     // Show generated chips
     const cont = document.getElementById('nn-continuation');
     if (cont) {
@@ -180,6 +182,11 @@ class NeuralMusicDemo {
     this._updateSeedDisplay();
     this.audio.playSequence(this.seed.map(n => n.pitch), 0.3, 0.04);
     this._setStatus(`Loaded Bach-style seed (8 notes). Click <b>Continue</b>!`);
+  }
+
+  getExportMelody() {
+    const seed = this.seed.map(n => n.pitch);
+    return this.lastExportMelody.length ? [...seed, ...this.lastExportMelody] : seed;
   }
 
   /* ------------------------------------------------------------------ */

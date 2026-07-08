@@ -10,6 +10,9 @@ class MIDIHandler {
     this.isSupported      = !!navigator.requestMIDIAccess;
     this.deviceName       = 'None';
     this.connected        = false;
+    this.outputPort       = null;
+    this.outputEnabled    = false;
+    this.outputName       = 'None';
   }
 
   async init() {
@@ -35,6 +38,41 @@ class MIDIHandler {
     const btn = document.getElementById('midi-status-btn');
     if (!btn) return;
     btn.addEventListener('click', () => this.init());
+
+    const outBtn = document.getElementById('midi-output-btn');
+    if (outBtn) {
+      outBtn.addEventListener('click', () => {
+        this.outputEnabled = !this.outputEnabled;
+        this._updateOutputButton();
+      });
+    }
+  }
+
+  sendNoteOn(note, velocity = 100, channel = 0) {
+    if (!this.outputEnabled || !this.outputPort) return;
+    this.outputPort.send([0x90 | (channel & 0x0F), note & 0x7F, velocity & 0x7F]);
+  }
+
+  sendNoteOff(note, channel = 0) {
+    if (!this.outputEnabled || !this.outputPort) return;
+    this.outputPort.send([0x80 | (channel & 0x0F), note & 0x7F, 0x40]);
+  }
+
+  _updateOutputButton() {
+    const btn = document.getElementById('midi-output-btn');
+    if (!btn) return;
+    if (!this.outputPort) {
+      btn.textContent = 'OUT';
+      btn.title = 'No MIDI output device';
+      btn.setAttribute('aria-label', 'No MIDI output device');
+      return;
+    }
+    btn.textContent = this.outputEnabled ? 'OUT ✓' : 'OUT';
+    const status = this.outputEnabled
+      ? `MIDI out ON: ${this.outputName}`
+      : `MIDI out OFF — click to route to ${this.outputName}`;
+    btn.title = status;
+    btn.setAttribute('aria-label', status);
   }
 
   _connectAll() {
@@ -44,7 +82,13 @@ class MIDIHandler {
     inputs.forEach(port => {
       port.onmidimessage = msg => this._parse(msg);
     });
+
+    const outputs = Array.from(this.midiAccess.outputs.values());
+    this.outputPort = outputs.length ? outputs[0] : null;
+    this.outputName = this.outputPort ? this.outputPort.name : 'None';
+
     this._updateStatusButton();
+    this._updateOutputButton();
   }
 
   _parse(msg) {
