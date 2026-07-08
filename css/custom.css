@@ -8,10 +8,22 @@
   --accent:     #f97316;
   --success:    #10b981;
   --danger:     #ef4444;
-  --bg-dark:    #0f0a1e;
-  --bg-card:    #1e1b4b;
-  --text-main:  #e2e8f0;
-  --text-muted: #94a3b8;
+
+  /* Light theme defaults */
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --panel: #ffffff;
+  --card: #ffffff;
+  --border: rgba(15, 23, 42, 0.14);
+  --border-strong: rgba(15, 23, 42, 0.22);
+  --row-alt: rgba(15, 23, 42, 0.035);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+
+  /* Legacy variables (kept for compatibility) */
+  --bg-dark: #ffffff;
+  --bg-card: #ffffff;
+
   --white-key:  #f8fafc;
   --black-key:  #1e293b;
   --key-pressed-user: #7c3aed;
@@ -20,8 +32,25 @@
   --key-pressed-evo: #10b981;
 }
 
+/* Dark theme overrides */
+body.dark-theme {
+  --bg: #000000;
+  --surface: #0f0a1e;
+  --panel: #0d0d1e;
+  --card: #1e1b4b;
+  --border: rgba(148, 163, 184, 0.22);
+  --border-strong: rgba(148, 163, 184, 0.34);
+  --row-alt: rgba(255, 255, 255, 0.03);
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+
+  /* Legacy variables */
+  --bg-dark: #000000;
+  --bg-card: #1e1b4b;
+}
+
 /* ---- Body ---- */
-.reveal-viewport { background: var(--bg-dark); }
+.reveal-viewport { background: var(--bg); }
 
 .reveal .slides section {
   text-align: left;
@@ -88,25 +117,25 @@
   font-size: 0.8em;
 }
 .comparison-table th {
-  background: var(--bg-card);
+  background: var(--card);
   padding: 0.5em 0.8em;
   text-align: center;
-  border: 1px solid #334155;
+  border: 1px solid var(--border-strong);
 }
 .comparison-table td {
   padding: 0.4em 0.8em;
-  border: 1px solid #1e293b;
+  border: 1px solid var(--border);
   text-align: center;
 }
-.comparison-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+.comparison-table tr:nth-child(even) td { background: var(--row-alt); }
 .check { color: var(--success); font-size: 1.2em; }
 .cross { color: var(--danger);  font-size: 1.2em; }
 .partial { color: var(--accent); font-size: 1.2em; }
 
 /* ---- Info Cards ---- */
 .card {
-  background: var(--bg-card);
-  border: 1px solid #312e81;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 0.75em;
   padding: 1em 1.2em;
   margin: 0.5em 0;
@@ -190,8 +219,8 @@
    Demo Panels
    ================================================================ */
 .demo-panel {
-  background: #0d0d1e;
-  border: 1px solid #312e81;
+  background: var(--panel);
+  border: 1px solid var(--border);
   border-radius: 0.75em;
   padding: 1em 1.2em;
   font-size: 0.85em;
@@ -207,8 +236,8 @@
 
 .demo-controls select,
 .demo-controls input {
-  background: var(--bg-card);
-  border: 1px solid #4338ca;
+  background: var(--card);
+  border: 1px solid var(--border-strong);
   color: var(--text-main);
   padding: 0.3em 0.5em;
   border-radius: 0.4em;
@@ -286,9 +315,9 @@
   flex-wrap: wrap;
   min-height: 28px;
   padding: 4px 6px;
-  background: #0a0a18;
+  background: var(--surface);
   border-radius: 4px;
-  border: 1px solid #1e293b;
+  border: 1px solid var(--border);
   margin: 0.4em 0;
 }
 .seed-note-chip {
@@ -331,11 +360,11 @@
   margin-bottom: 0.6em;
 }
 .evo-stat-card {
-  background: var(--bg-card);
+  background: var(--card);
   border-radius: 0.5em;
   padding: 0.4em 0.6em;
   text-align: center;
-  border: 1px solid #312e81;
+  border: 1px solid var(--border);
 }
 .evo-stat-card .stat-value {
   font-size: 1.4em;
@@ -352,7 +381,7 @@
 canvas.evo-canvas {
   width: 100%;
   border-radius: 4px;
-  background: #0a0a18;
+  background: var(--surface);
   margin: 0.3em 0;
   display: block;
 }
@@ -366,9 +395,9 @@ canvas.evo-canvas {
   flex-wrap: wrap;
   min-height: 28px;
   padding: 4px 6px;
-  background: #0a0a18;
+  background: var(--surface);
   border-radius: 4px;
-  border: 1px solid #1e293b;
+  border: 1px solid var(--border);
   margin: 0.4em 0;
   font-family: monospace;
   font-size: 0.8em;
@@ -387,12 +416,12 @@ canvas.evo-canvas {
   color: var(--text-muted);
 }
 .kb-shortcuts kbd {
-  background: #334155;
-  border: 1px solid #475569;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
   border-radius: 3px;
   padding: 1px 6px;
   font-family: monospace;
-  color: #e2e8f0;
+  color: var(--text-main);
 }
 
 /* ================================================================
@@ -408,19 +437,17 @@ canvas.evo-canvas {
   gap: 0.6em;
   font-size: 0.75em;
   color: var(--text-muted);
-  background: rgba(15, 10, 30, 0.88);
+  background: rgba(255, 255, 255, 0.88);
   padding: 0.45em 0.75em;
   border-radius: 999px;
-  border: 1px solid #312e81;
+  border: 1px solid var(--border);
   z-index: 9999;
   pointer-events: auto;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 
-/* In light theme, keep the status bar legible */
-body:not(.dark-theme) #midi-status-bar {
-  background: rgba(255, 255, 255, 0.88);
-  border-color: rgba(0, 0, 0, 0.12);
+body.dark-theme #midi-status-bar {
+  background: rgba(15, 10, 30, 0.88);
 }
 #midi-status-bar .dot {
   display: inline-block;
