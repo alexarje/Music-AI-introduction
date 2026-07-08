@@ -15,6 +15,7 @@ class RuleBasedHarmonizer {
     // Current settings
     this.rootPc = 0;   // pitch class 0..11  (0 = C)
     this.mode   = 'major';
+    this.inversion = 0; // 0 = root, 1 = first, 2 = second
 
     // Active note → array of all notes playing (including chord tones)
     this._active = new Map();
@@ -25,7 +26,13 @@ class RuleBasedHarmonizer {
       minor:    [0, 2, 3, 5, 7, 8, 10],
       dorian:   [0, 2, 3, 5, 7, 9, 10],
       mixo:     [0, 2, 4, 5, 7, 9, 10],
-      blues:    [0, 3, 5, 6, 7, 10]
+      blues:    [0, 3, 5, 6, 7, 10],
+      lydian:   [0, 2, 4, 6, 7, 9, 11],
+      phrygian: [0, 1, 3, 5, 7, 8, 10],
+      locrian:  [0, 1, 3, 5, 6, 8, 10],
+      harmonicMinor: [0, 2, 3, 5, 7, 8, 11],
+      wholeTone: [0, 2, 4, 6, 8, 10],
+      octatonic: [0, 2, 3, 5, 6, 8, 9, 11]
     };
 
     // Chord intervals for each diatonic scale degree
@@ -104,12 +111,46 @@ class RuleBasedHarmonizer {
     return scale.indexOf(pc);   // -1 = chromatic note (not in scale)
   }
 
+  _applyInversion(chord) {
+    const inv = Math.max(0, Math.min(2, this.inversion | 0));
+    if (inv === 0 || chord.length < 3) return chord;
+
+    const out = chord.slice();
+    for (let i = 0; i < inv && i < out.length; i++) out[i] += 12;
+    out.sort((a, b) => a - b);
+    return out;
+  }
+
+  _triadFromScaleSteps(midiNote) {
+    const scale = this.SCALES[this.mode] ?? this.SCALES.major;
+    const deg = this._scaleDegree(midiNote);
+    if (deg < 0) return [midiNote, midiNote + 4, midiNote + 7];
+
+    const pc = ((midiNote - this.rootPc) % 12 + 12) % 12;
+    const step = (i) => scale[(deg + i) % scale.length];
+
+    const pcs = [step(0), step(2), step(4)];
+    const notes = [];
+    let prev = midiNote - 1;
+    pcs.forEach((targetPc) => {
+      let d = (targetPc - pc + 12) % 12;
+      let n = midiNote + d;
+      while (n <= prev) n += 12;
+      notes.push(n);
+      prev = n;
+    });
+    return notes;
+  }
+
   _chordFor(midiNote) {
-    const degree    = this._scaleDegree(midiNote);
-    const intervals = degree >= 0
-      ? (this.CHORD_INTERVALS[this.mode] ?? this.CHORD_INTERVALS.major)[degree]
-      : [0, 4, 7];              // default to major triad for chromatic notes
-    return intervals.map(iv => midiNote + iv);
+    const degree = this._scaleDegree(midiNote);
+    const byMode = this.CHORD_INTERVALS[this.mode];
+
+    if (degree >= 0 && byMode && byMode[degree]) {
+      return this._applyInversion(byMode[degree].map(iv => midiNote + iv));
+    }
+
+    return this._applyInversion(this._triadFromScaleSteps(midiNote));
   }
 
   _chordLabel(midiNote) {
@@ -118,9 +159,12 @@ class RuleBasedHarmonizer {
     const degree = this._scaleDegree(midiNote);
     if (degree < 0) return `${name} (chromatic → major triad)`;
 
-    const degNames = this.DEGREE_NAMES[this.mode] ?? this.DEGREE_NAMES.major;
-    const qualName = this.QUALITY_NAMES[this.mode] ?? this.QUALITY_NAMES.major;
-    return `${name} ${qualName[degree]} — degree ${degNames[degree]}`;
+    const degNames = this.DEGREE_NAMES[this.mode];
+    const qualName = this.QUALITY_NAMES[this.mode];
+    const degLabel = degNames?.[degree] ?? `#${degree + 1}`;
+    const qualLabel = qualName?.[degree] ?? 'triad';
+    const invLabel = this.inversion === 1 ? ' (1st inv.)' : this.inversion === 2 ? ' (2nd inv.)' : '';
+    return `${name} ${qualLabel}${invLabel} — degree ${degLabel}`;
   }
 
   /* ------------------------------------------------------------------ */
@@ -129,6 +173,7 @@ class RuleBasedHarmonizer {
 
   setRoot(pitchClass) { this.rootPc = pitchClass; }
   setMode(mode)       { this.mode   = mode; }
+  setInversion(inv)   { this.inversion = Math.max(0, Math.min(2, inv | 0)); }
   toggle()            { this.enabled = !this.enabled; return this.enabled; }
 
   noteOn(midiNote, velocity = 100) {

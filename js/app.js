@@ -114,6 +114,7 @@ function bindButtons() {
   const rbToggle = document.getElementById('rb-toggle');
   const rbKey    = document.getElementById('rb-key');
   const rbMode   = document.getElementById('rb-mode');
+  const rbInv    = document.getElementById('rb-inversion');
 
   if (rbToggle) {
     rbToggle.addEventListener('click', () => {
@@ -125,6 +126,7 @@ function bindButtons() {
   }
   if (rbKey)  rbKey.addEventListener('change',  () => harmonizer.setRoot(parseInt(rbKey.value)));
   if (rbMode) rbMode.addEventListener('change', () => harmonizer.setMode(rbMode.value));
+  if (rbInv)  rbInv.addEventListener('change',  () => harmonizer.setInversion(parseInt(rbInv.value)));
 
   /* ---- Markov ---- */
   const mkRecord  = document.getElementById('mk-record');
