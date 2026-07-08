@@ -19,6 +19,11 @@ class EvolutionaryComposer {
     this.fitHistory = [];
     this.avgHistory = [];
     this._timers    = [];
+    this.fitnessMode = 'rules'; // 'rules' | 'audience'
+    this.audienceScores = new Map();
+    this.awaitingRating = false;
+    this.pendingMelody = null;
+    this._tickFn = null;
 
     // C major pentatonic + passing tones — pleasant results without extra rules
     this.POOL = [60,62,64,67,69,72,74,76,79,81,64,67,69,72];
@@ -77,13 +82,61 @@ class EvolutionaryComposer {
     return Math.max(0, s);
   }
 
+  _melodyKey(mel) {
+    return mel.join(',');
+  }
+
+  _audienceFitness(mel) {
+    const entry = this.audienceScores.get(this._melodyKey(mel));
+    if (!entry || !entry.count) return this.fitness(mel) * 0.25;
+    return (entry.sum / entry.count) * 4;
+  }
+
+  _scoreMelody(mel) {
+    return this.fitnessMode === 'audience' ? this._audienceFitness(mel) : this.fitness(mel);
+  }
+
+  setFitnessMode(mode) {
+    this.fitnessMode = mode === 'audience' ? 'audience' : 'rules';
+    this._showRatingUI(this.fitnessMode === 'audience');
+    if (this.fitnessMode === 'rules') {
+      this.awaitingRating = false;
+      this.pendingMelody = null;
+    }
+  }
+
+  ratePending(stars) {
+    if (!this.pendingMelody) return;
+    const key = this._melodyKey(this.pendingMelody);
+    const entry = this.audienceScores.get(key) || { sum: 0, count: 0 };
+    entry.sum += Math.max(1, Math.min(5, stars | 0));
+    entry.count += 1;
+    this.audienceScores.set(key, entry);
+    this.awaitingRating = false;
+    this.pendingMelody = null;
+    this._setStatus(`Rated ${stars}/5 — continuing evolution…`);
+    if (this.running && this._tickFn) this._schedule(this._tickFn, 60);
+  }
+
+  _showRatingUI(show) {
+    const panel = document.getElementById('evo-rating');
+    if (panel) panel.style.display = show ? 'flex' : 'none';
+  }
+
+  _pauseForRating(mel) {
+    this.awaitingRating = true;
+    this.pendingMelody = [...mel];
+    this.playMelody(mel, 0.22);
+    this._setStatus('⭐ Rate this melody (1–5) — audience guides fitness (GenJam-style)');
+  }
+
   _select() {
     // Tournament selection (k=3)
     const k = 3;
     let best = null, bestF = -Infinity;
     for (let i = 0; i < k; i++) {
       const cand = this.population[Math.floor(Math.random() * this.population.length)];
-      const f    = this.fitness(cand);
+      const f    = this._scoreMelody(cand);
       if (f > bestF) { bestF = f; best = cand; }
     }
     return best;
@@ -104,7 +157,7 @@ class EvolutionaryComposer {
 
   _step() {
     const scored = this.population
-      .map(m => ({ m, f: this.fitness(m) }))
+      .map(m => ({ m, f: this._scoreMelody(m) }))
       .sort((a, b) => b.f - a.f);
 
     const topF = scored[0].f;
@@ -137,15 +190,21 @@ class EvolutionaryComposer {
     if (this.running) return;
     this._clearTimers();
     this.running    = true;
+    this.awaitingRating = false;
+    this.pendingMelody = null;
     this.generation = 0;
     this.bestFit    = 0;
     this.best       = null;
     this.fitHistory = [];
     this.avgHistory = [];
     this.population = Array.from({ length: this.popSize }, () => this._random());
+    this._showRatingUI(this.fitnessMode === 'audience');
 
     const tick = () => {
-      if (!this.running || this.generation >= maxGenerations) {
+      this._tickFn = tick;
+      if (!this.running || this.awaitingRating) return;
+
+      if (this.generation >= maxGenerations) {
         this.running = false;
         this._setStatus(`Evolution complete — Generation ${this.generation}`);
         this._updateBtnState(false);
@@ -155,7 +214,11 @@ class EvolutionaryComposer {
       const { top, topF, avgF } = this._step();
       this._updateDisplay(top, topF, avgF);
 
-      // Play the best melody every 10 generations
+      if (this.fitnessMode === 'audience' && this.generation > 0 && this.generation % 8 === 0) {
+        this._pauseForRating(top);
+        return;
+      }
+
       if (this.generation % 10 === 0) {
         this.playMelody(top, 0.18);
       }
@@ -179,6 +242,8 @@ class EvolutionaryComposer {
 
   kill() {
     this.running = false;
+    this.awaitingRating = false;
+    this.pendingMelody = null;
     this._clearTimers();
     this._updateBtnState(false);
     this._setStatus('Stopped.');

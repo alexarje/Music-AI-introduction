@@ -417,6 +417,39 @@
     </p>
   </section>
 
+  <!-- 1.7 DEMO: Species Counterpoint (Issue #7) -->
+  <section data-demo="counterpoint">
+    <h2><span class="badge badge-demo">Demo</span> First-Species Counterpoint</h2>
+    <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.6em">
+      Record a <em>cantus firmus</em> (lower voice). The algorithm generates an upper counter-melody
+      avoiding parallel fifths/octaves and favouring contrary motion.
+    </p>
+    <div class="demo-panel">
+      <div class="demo-controls">
+        <button id="cp-record" class="btn btn-danger">⏺ Record CF</button>
+        <button id="cp-stop" class="btn btn-warning" disabled>⏹ Stop</button>
+        <button id="cp-bach" class="btn btn-outline">🎼 Bach CF</button>
+        <button id="cp-generate" class="btn btn-primary">⚙ Generate</button>
+        <button id="cp-play" class="btn btn-info">▶ Play Both</button>
+      </div>
+
+      <div class="piano-wrapper">
+        <div id="piano-cp"></div>
+      </div>
+
+      <div style="font-size:0.75em;color:#94a3b8;margin:0.3em 0">Cantus firmus (purple):</div>
+      <div class="seed-notes-display" id="cp-cantus"><span style="color:#475569">No notes yet</span></div>
+      <div style="font-size:0.75em;color:#94a3b8;margin:0.3em 0">Counter-melody (cyan):</div>
+      <div class="seed-notes-display" id="cp-counter"><span style="color:#475569">—</span></div>
+
+      <p class="status-line" id="cp-status">Record a cantus firmus or load the Bach seed.</p>
+    </div>
+    <aside class="notes">
+      Demonstrate rule encoding: parallel fifths are forbidden, contrary motion is preferred.
+      Generate, then play both voices together.
+    </aside>
+  </section>
+
 </section><!-- /section 1 -->
 
 <!-- =========================================================
@@ -780,13 +813,27 @@
   <section data-demo="evo">
     <h2><span class="badge badge-demo">Demo</span> Genetic Algorithm Melody Evolution</h2>
     <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.5em">
-      Population of 24 melodies. C major pentatonic. Fitness: step motion + arch shape + tonic ending.
+      Population of 24 melodies. Switch to <strong>Audience (IGA)</strong> mode to rate melodies like GenJam.
     </p>
     <div class="demo-panel">
       <div class="demo-controls">
         <button id="evo-start"  class="btn btn-success">▶ Start Evolution</button>
         <button id="evo-stop"   class="btn btn-danger"  disabled>⏹ Stop</button>
         <button id="evo-play"   class="btn btn-primary">🔊 Play Best</button>
+        <label style="font-size:0.8em;color:#94a3b8">Fitness:</label>
+        <select id="evo-fitness-mode">
+          <option value="rules">Automated rules</option>
+          <option value="audience">Audience (IGA)</option>
+        </select>
+      </div>
+
+      <div id="evo-rating" class="demo-controls" style="display:none;margin-top:0.4em">
+        <span style="font-size:0.8em;color:#94a3b8">Rate melody:</span>
+        <button class="btn btn-outline btn-sm evo-rate" data-stars="1">★</button>
+        <button class="btn btn-outline btn-sm evo-rate" data-stars="2">★★</button>
+        <button class="btn btn-outline btn-sm evo-rate" data-stars="3">★★★</button>
+        <button class="btn btn-outline btn-sm evo-rate" data-stars="4">★★★★</button>
+        <button class="btn btn-outline btn-sm evo-rate" data-stars="5">★★★★★</button>
       </div>
 
       <div class="evo-stats">
@@ -992,6 +1039,7 @@
 <script src="js/midi-handler.js"></script>
 <script src="js/audio-engine.js"></script>
 <script src="js/rule-based.js"></script>
+<script src="js/counterpoint.js"></script>
 <script src="js/markov-music.js"></script>
 <script src="js/neural-music.js"></script>
 <script src="js/evolutionary-music.js"></script>

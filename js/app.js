@@ -10,6 +10,7 @@
 /* ------------------------------------------------------------------ */
 let audio, midi, kbFallback;
 let harmonizer, pianoRB;
+let counterpoint, pianoCP;
 let markov,     pianoMK;
 let neural,     pianoNN;
 let evo;
@@ -26,10 +27,12 @@ function killAll() {
   audio?.killAll();
   harmonizer?.allNotesOff();
   pianoRB?.releaseAll();
+  pianoCP?.releaseAll();
   pianoMK?.releaseAll();
   pianoNN?.releaseAll();
   markov?.kill();
   neural?.kill();
+  counterpoint?.kill();
   evo?.kill();
   kbFallback?.releaseAllHeld();
 
@@ -51,13 +54,18 @@ function killAll() {
   const evoStop = document.getElementById('evo-stop');
   if (evoStart) evoStart.disabled = false;
   if (evoStop) evoStop.disabled = true;
+
+  const cpRecord = document.getElementById('cp-record');
+  const cpStop = document.getElementById('cp-stop');
+  if (cpRecord) cpRecord.disabled = false;
+  if (cpStop) cpStop.disabled = true;
 }
 
 /* ------------------------------------------------------------------ */
 /* Demo activation (called on slide-change)                             */
 /* ------------------------------------------------------------------ */
 
-let activeDemo = null;   // 'rule-based' | 'markov' | 'neural' | 'evo' | null
+let activeDemo = null;   // 'rule-based' | 'counterpoint' | 'markov' | 'neural' | 'evo' | null
 
 function activateDemo(name) {
   if (activeDemo === name) return;
@@ -72,6 +80,13 @@ function activateDemo(name) {
     midi.onNoteOff(n     => harmonizer.noteOff(n));
     pianoRB.onNoteOn  = (n, v) => { unlockAudio(); harmonizer.noteOn(n, v); };
     pianoRB.onNoteOff =  n     => harmonizer.noteOff(n);
+  }
+
+  if (name === 'counterpoint') {
+    midi.onNoteOn ((n, v) => { unlockAudio(); counterpoint.noteOn(n, v); });
+    midi.onNoteOff(n     => counterpoint.noteOff(n));
+    pianoCP.onNoteOn  = (n, v) => { unlockAudio(); counterpoint.noteOn(n, v); };
+    pianoCP.onNoteOff =  n     => counterpoint.noteOff(n);
   }
 
   if (name === 'markov') {
@@ -133,6 +148,37 @@ function bindButtons() {
   if (rbAccomp) rbAccomp.addEventListener('change', () => harmonizer.setAccompEnabled(rbAccomp.value === 'on'));
   if (rbPattern) rbPattern.addEventListener('change', () => harmonizer.setAccompPattern(rbPattern.value));
   if (rbSplit) rbSplit.addEventListener('change', () => harmonizer.setBassSplitNote(parseInt(rbSplit.value)));
+
+  /* ---- Counterpoint ---- */
+  const cpRecord = document.getElementById('cp-record');
+  const cpStop = document.getElementById('cp-stop');
+  const cpBach = document.getElementById('cp-bach');
+  const cpGenerate = document.getElementById('cp-generate');
+  const cpPlay = document.getElementById('cp-play');
+
+  if (cpRecord) cpRecord.addEventListener('click', () => {
+    unlockAudio();
+    counterpoint.startRecording();
+    cpRecord.disabled = true;
+    cpStop.disabled = false;
+  });
+  if (cpStop) cpStop.addEventListener('click', () => {
+    counterpoint.stopRecording();
+    cpRecord.disabled = false;
+    cpStop.disabled = true;
+  });
+  if (cpBach) cpBach.addEventListener('click', () => {
+    unlockAudio();
+    counterpoint.loadBachCantus();
+  });
+  if (cpGenerate) cpGenerate.addEventListener('click', () => {
+    unlockAudio();
+    counterpoint.generate();
+  });
+  if (cpPlay) cpPlay.addEventListener('click', () => {
+    unlockAudio();
+    counterpoint.playBoth(0.32);
+  });
 
   /* ---- Markov ---- */
   const mkRecord  = document.getElementById('mk-record');
@@ -205,6 +251,17 @@ function bindButtons() {
   const evoStart  = document.getElementById('evo-start');
   const evoStop   = document.getElementById('evo-stop');
   const evoPlay   = document.getElementById('evo-play');
+  const evoFitnessMode = document.getElementById('evo-fitness-mode');
+
+  if (evoFitnessMode) {
+    evoFitnessMode.addEventListener('change', () => evo.setFitnessMode(evoFitnessMode.value));
+  }
+  document.querySelectorAll('.evo-rate').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      unlockAudio();
+      evo.ratePending(parseInt(btn.dataset.stars, 10));
+    });
+  });
 
   if (evoStart) evoStart.addEventListener('click', () => {
     unlockAudio();
@@ -338,6 +395,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   pianoRB   = new PianoKeyboard('piano-rb', { startNote: 48, endNote: 84 });
   harmonizer= new RuleBasedHarmonizer(audio, pianoRB);
   harmonizer.enabled = true;  // on by default
+
+  /* ---- Counterpoint demo ---- */
+  pianoCP = new PianoKeyboard('piano-cp', { startNote: 48, endNote: 84 });
+  counterpoint = new SpeciesCounterpoint(audio, pianoCP);
 
   /* ---- Markov demo ---- */
   pianoMK   = new PianoKeyboard('piano-mk', { startNote: 48, endNote: 84 });
