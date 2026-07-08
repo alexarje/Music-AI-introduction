@@ -17,6 +17,11 @@ class RuleBasedHarmonizer {
     this.mode   = 'major';
     this.inversion = 0; // 0 = root, 1 = first, 2 = second
 
+    // Bass-line accompaniment (Issue #9)
+    this.accompEnabled = false;
+    this.accompPattern = 'block'; // block | alberti | walking | stride
+    this.bassSplitNote = 54; // F#3 default: notes below are treated as bass
+
     // Active note → array of all notes playing (including chord tones)
     this._active = new Map();
 
@@ -142,6 +147,44 @@ class RuleBasedHarmonizer {
     return notes;
   }
 
+  _voiceChordAbove(bassNote, chord) {
+    const out = chord.slice();
+    const minTarget = bassNote + 12;
+    for (let i = 0; i < out.length; i++) {
+      while (out[i] < minTarget) out[i] += 12;
+    }
+    out.sort((a, b) => a - b);
+    return out;
+  }
+
+  _playAccompanimentForBass(bassNote) {
+    const chord = this._chordFor(bassNote);
+    const voiced = this._voiceChordAbove(bassNote, chord);
+    const [root, third, fifth] = voiced;
+
+    // Keep patterns short (one bar-ish) so we don't need complex cancellation.
+    if (this.accompPattern === 'alberti') {
+      // root–fifth–third–fifth
+      this.audio.playSequence([root, fifth, third, fifth], 0.22, 0.03, 0.05);
+      return;
+    }
+    if (this.accompPattern === 'walking') {
+      // bass up an octave plus chord tones (simple "walk")
+      const bassUp = bassNote + 12;
+      this.audio.playSequence([bassUp, root, third, fifth], 0.22, 0.03, 0.05);
+      return;
+    }
+    if (this.accompPattern === 'stride') {
+      // bass hit + upper chord (alternating)
+      this.audio.playSequence([bassNote + 12, -1, bassNote + 12, -1], 0.22, 0.03, 0.05);
+      this.audio.playChord(voiced, '4n');
+      return;
+    }
+
+    // Default: block chord
+    this.audio.playChord(voiced, '2n');
+  }
+
   _chordFor(midiNote) {
     const degree = this._scaleDegree(midiNote);
     const byMode = this.CHORD_INTERVALS[this.mode];
@@ -174,9 +217,18 @@ class RuleBasedHarmonizer {
   setRoot(pitchClass) { this.rootPc = pitchClass; }
   setMode(mode)       { this.mode   = mode; }
   setInversion(inv)   { this.inversion = Math.max(0, Math.min(2, inv | 0)); }
+  setAccompEnabled(on) { this.accompEnabled = !!on; }
+  setAccompPattern(p) { this.accompPattern = p; }
+  setBassSplitNote(n) { this.bassSplitNote = Math.max(0, Math.min(127, n | 0)); }
   toggle()            { this.enabled = !this.enabled; return this.enabled; }
 
   noteOn(midiNote, velocity = 100) {
+    if (this.accompEnabled && midiNote < this.bassSplitNote) {
+      this._playAccompanimentForBass(midiNote);
+      this._setChordDisplay(this._chordLabel(midiNote));
+      return;
+    }
+
     if (!this.enabled) {
       this.audio.noteOn(midiNote, velocity);
       this.piano?.pressKey(midiNote, '#7c3aed');

@@ -268,6 +268,36 @@
     </p>
   </section>
 
+  <!-- 1.4b Circle of Fifths (Issue #12) -->
+  <section>
+    <h2>Circle of Fifths</h2>
+    <p style="font-size:0.78em;color:#94a3b8;margin-bottom:0.8em">
+      Highlights update from the Key/Mode selector in the Chord Harmoniser demo.
+    </p>
+    <div class="two-col" style="align-items:center">
+      <div style="display:flex;justify-content:center">
+        <svg id="circle-of-fifths" width="420" height="420" viewBox="0 0 420 420" role="img" aria-label="Circle of fifths">
+          <circle cx="210" cy="210" r="170" fill="none" stroke="rgba(148,163,184,0.25)" stroke-width="2"></circle>
+          <g id="cof-nodes"></g>
+          <circle cx="210" cy="210" r="6" fill="rgba(148,163,184,0.35)"></circle>
+        </svg>
+      </div>
+      <div>
+        <div class="card">
+          <h4>Selected key</h4>
+          <p id="cof-key" style="margin-top:0.2em">C major</p>
+        </div>
+        <div class="card">
+          <h4>Diatonic chords</h4>
+          <p id="cof-chords" style="margin-top:0.2em">I ii iii IV V vi vii°</p>
+        </div>
+        <p style="font-size:0.7em;color:#475569;margin-top:0.6em">
+          Tip: try switching to Lydian/Phrygian/Locrian to see how the chord qualities change.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- 1.5 DEMO: Chord Harmoniser -->
   <section data-demo="rule-based">
     <h2><span class="badge badge-demo">Demo</span> Chord Harmoniser</h2>
@@ -305,6 +335,27 @@
           <option value="0">Root</option>
           <option value="1">1st</option>
           <option value="2">2nd</option>
+        </select>
+        <label style="font-size:0.82em;color:#94a3b8">Accomp:</label>
+        <select id="rb-accomp">
+          <option value="off">Off</option>
+          <option value="on">On</option>
+        </select>
+        <label style="font-size:0.82em;color:#94a3b8">Pattern:</label>
+        <select id="rb-pattern">
+          <option value="block">Block</option>
+          <option value="alberti">Alberti</option>
+          <option value="walking">Walking</option>
+          <option value="stride">Stride</option>
+        </select>
+        <label style="font-size:0.82em;color:#94a3b8">Bass split:</label>
+        <select id="rb-split">
+          <option value="48">C3</option>
+          <option value="50">D3</option>
+          <option value="52">E3</option>
+          <option value="54" selected>F#3</option>
+          <option value="55">G3</option>
+          <option value="57">A3</option>
         </select>
         <button id="rb-toggle" class="btn btn-info">🎵 Harmonize ON</button>
       </div>

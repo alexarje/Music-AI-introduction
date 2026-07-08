@@ -115,6 +115,9 @@ function bindButtons() {
   const rbKey    = document.getElementById('rb-key');
   const rbMode   = document.getElementById('rb-mode');
   const rbInv    = document.getElementById('rb-inversion');
+  const rbAccomp = document.getElementById('rb-accomp');
+  const rbPattern= document.getElementById('rb-pattern');
+  const rbSplit  = document.getElementById('rb-split');
 
   if (rbToggle) {
     rbToggle.addEventListener('click', () => {
@@ -127,6 +130,9 @@ function bindButtons() {
   if (rbKey)  rbKey.addEventListener('change',  () => harmonizer.setRoot(parseInt(rbKey.value)));
   if (rbMode) rbMode.addEventListener('change', () => harmonizer.setMode(rbMode.value));
   if (rbInv)  rbInv.addEventListener('change',  () => harmonizer.setInversion(parseInt(rbInv.value)));
+  if (rbAccomp) rbAccomp.addEventListener('change', () => harmonizer.setAccompEnabled(rbAccomp.value === 'on'));
+  if (rbPattern) rbPattern.addEventListener('change', () => harmonizer.setAccompPattern(rbPattern.value));
+  if (rbSplit) rbSplit.addEventListener('change', () => harmonizer.setBassSplitNote(parseInt(rbSplit.value)));
 
   /* ---- Markov ---- */
   const mkRecord  = document.getElementById('mk-record');
@@ -222,6 +228,95 @@ function bindButtons() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Circle of Fifths (Issue #12)                                         */
+/* ------------------------------------------------------------------ */
+
+function initCircleOfFifths() {
+  const svg = document.getElementById('circle-of-fifths');
+  const nodes = document.getElementById('cof-nodes');
+  const keyEl = document.getElementById('cof-key');
+  const chordsEl = document.getElementById('cof-chords');
+  if (!svg || !nodes || !keyEl || !chordsEl) return;
+
+  const NOTE_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  // Circle-of-fifths order (pitch classes)
+  const ORDER = [0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5];
+
+  const cx = 210, cy = 210, r = 170;
+  nodes.innerHTML = '';
+  ORDER.forEach((pc, i) => {
+    const a = (i / ORDER.length) * Math.PI * 2 - Math.PI / 2;
+    const x = cx + Math.cos(a) * r;
+    const y = cy + Math.sin(a) * r;
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('data-pc', String(pc));
+
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', String(x));
+    c.setAttribute('cy', String(y));
+    c.setAttribute('r', '18');
+    c.setAttribute('fill', 'rgba(148,163,184,0.14)');
+    c.setAttribute('stroke', 'rgba(148,163,184,0.25)');
+    c.setAttribute('stroke-width', '1.5');
+
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', String(x));
+    t.setAttribute('y', String(y + 5));
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('font-size', '12');
+    t.setAttribute('font-family', 'system-ui, -apple-system, Segoe UI, Roboto, Arial');
+    t.setAttribute('fill', 'currentColor');
+    t.textContent = NOTE_NAMES[pc];
+
+    g.appendChild(c);
+    g.appendChild(t);
+    nodes.appendChild(g);
+  });
+
+  const update = () => {
+    const rootPc = harmonizer?.rootPc ?? 0;
+    const mode = harmonizer?.mode ?? 'major';
+
+    const modeName = mode === 'minor'
+      ? 'minor'
+      : mode === 'harmonicMinor'
+        ? 'harmonic minor'
+        : mode === 'wholeTone'
+          ? 'whole tone'
+          : mode === 'octatonic'
+            ? 'octatonic'
+            : mode;
+
+    keyEl.textContent = `${NOTE_NAMES[rootPc]} ${modeName}`;
+
+    // Highlight selected key on the circle (by pitch class).
+    Array.from(nodes.querySelectorAll('g[data-pc]')).forEach((g) => {
+      const pc = parseInt(g.getAttribute('data-pc'), 10);
+      const circle = g.querySelector('circle');
+      if (!circle) return;
+      if (pc === rootPc) {
+        circle.setAttribute('fill', 'rgba(6,182,212,0.35)');
+        circle.setAttribute('stroke', 'rgba(6,182,212,0.7)');
+        circle.setAttribute('stroke-width', '2');
+      } else {
+        circle.setAttribute('fill', 'rgba(148,163,184,0.14)');
+        circle.setAttribute('stroke', 'rgba(148,163,184,0.25)');
+        circle.setAttribute('stroke-width', '1.5');
+      }
+    });
+
+    const degs = harmonizer?.DEGREE_NAMES?.[mode] ?? harmonizer?.DEGREE_NAMES?.major ?? ['I','ii','iii','IV','V','vi','vii°'];
+    chordsEl.textContent = degs.join(' ');
+  };
+
+  // Update on selector changes (demo controls)
+  document.getElementById('rb-key')?.addEventListener('change', update);
+  document.getElementById('rb-mode')?.addEventListener('change', update);
+  update();
+}
+
+/* ------------------------------------------------------------------ */
 /* Bootstrap                                                            */
 /* ------------------------------------------------------------------ */
 
@@ -273,6 +368,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Buttons ---- */
   bindButtons();
+  initCircleOfFifths();
 
   /* ---- Unlock audio on first click anywhere ---- */
   document.addEventListener('click', unlockAudio, { once: true });
