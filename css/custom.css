@@ -425,37 +425,8 @@ canvas.evo-canvas {
 }
 
 /* ================================================================
-   MIDI Status indicator
+   MIDI status indicator
    ================================================================ */
-#midi-status-bar {
-  position: fixed;
-  top: 0.75em;
-  left: 0.75em;
-  right: 0.75em;
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  font-size: 0.75em;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.88);
-  padding: 0.45em 0.75em;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  z-index: 9999;
-  pointer-events: auto;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-}
-
-body.dark-theme #midi-status-bar {
-  background: rgba(15, 10, 30, 0.88);
-}
-#midi-status-bar .dot {
-  display: inline-block;
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  margin-right: 5px;
-  vertical-align: middle;
-}
 .dot-connected { background: var(--success); }
 .dot-disconnected { background: var(--danger); }
 

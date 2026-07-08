@@ -18,7 +18,10 @@
   <link rel="stylesheet" href="css/custom.css" />
 
   <style>
-    .theme-toggle {
+    .floating-control {
+      position: fixed;
+      top: 0.75em;
+      z-index: 10000;
       border: 0;
       border-radius: 999px;
       padding: 0.35rem 0.7rem;
@@ -26,43 +29,53 @@
       background: rgba(255, 255, 255, 0.12);
       color: rgba(255, 255, 255, 0.92);
       font: inherit;
+      font-size: 0.75rem;
       line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
     }
 
-    .theme-toggle:focus-visible {
+    .floating-control:focus-visible {
       outline: 2px solid rgba(255, 255, 255, 0.9);
       outline-offset: 2px;
     }
 
-    body:not(.dark-theme) .theme-toggle {
+    body:not(.dark-theme) .floating-control {
       background: rgba(0, 0, 0, 0.12);
       color: rgba(0, 0, 0, 0.88);
     }
 
-    body:not(.dark-theme) .theme-toggle:focus-visible {
+    body:not(.dark-theme) .floating-control:focus-visible {
       outline-color: rgba(0, 0, 0, 0.9);
     }
 
-    .theme-toggle--floating {
-      position: fixed;
-      top: 0.75em;
-      right: 0.75em;
-      z-index: 10000;
+    .floating-control--left { left: 0.75em; }
+    .floating-control--right { right: 0.75em; }
+
+    .floating-control .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
   </style>
 </head>
 <body>
 
-<!-- =========================================================
-     MIDI status indicator (always visible)
-     ========================================================= -->
-<div id="midi-status-bar">
-  <span class="dot dot-disconnected"></span>
-  <span class="midi-label">MIDI: not connected</span>
-</div>
+<button
+  class="floating-control floating-control--left"
+  id="midi-status-btn"
+  type="button"
+  aria-label="MIDI: not connected"
+  title="MIDI: not connected — click to connect"
+>
+  <span class="dot dot-disconnected" aria-hidden="true"></span>
+  <span class="midi-label">MIDI</span>
+</button>
 
 <button
-  class="theme-toggle theme-toggle--floating"
+  class="floating-control floating-control--right"
   id="theme-toggle"
   type="button"
   aria-label="Toggle theme"

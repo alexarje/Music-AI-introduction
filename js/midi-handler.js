@@ -15,18 +15,26 @@ class MIDIHandler {
   async init() {
     if (!this.isSupported) {
       console.warn('[MIDI] Web MIDI API not supported in this browser.');
+      this._updateStatusButton();
       return false;
     }
     try {
       this.midiAccess = await navigator.requestMIDIAccess({ sysex: false });
-      this._connectAll();
       this.midiAccess.onstatechange = () => this._connectAll();
-      this.connected = true;
+      this._connectAll();
       return true;
     } catch (err) {
       console.warn('[MIDI] Access denied:', err.message);
+      this.connected = false;
+      this._updateStatusButton();
       return false;
     }
+  }
+
+  bindStatusButton() {
+    const btn = document.getElementById('midi-status-btn');
+    if (!btn) return;
+    btn.addEventListener('click', () => this.init());
   }
 
   _connectAll() {
@@ -36,7 +44,7 @@ class MIDIHandler {
     inputs.forEach(port => {
       port.onmidimessage = msg => this._parse(msg);
     });
-    this._updateStatusBar();
+    this._updateStatusButton();
   }
 
   _parse(msg) {
@@ -51,17 +59,27 @@ class MIDIHandler {
     }
   }
 
-  _updateStatusBar() {
-    const bar = document.getElementById('midi-status-bar');
-    if (!bar) return;
-    const dot = bar.querySelector('.dot');
-    const lbl = bar.querySelector('.midi-label');
+  _updateStatusButton() {
+    const btn = document.getElementById('midi-status-btn');
+    if (!btn) return;
+    const dot = btn.querySelector('.dot');
+    const lbl = btn.querySelector('.midi-label');
     if (this.connected) {
       dot.className = 'dot dot-connected';
-      lbl.textContent = 'MIDI: ' + this.deviceName;
+      lbl.textContent = 'MIDI';
+      const status = `MIDI: ${this.deviceName}`;
+      btn.title = status;
+      btn.setAttribute('aria-label', status);
+    } else if (!this.isSupported) {
+      dot.className = 'dot dot-disconnected';
+      lbl.textContent = 'MIDI';
+      btn.title = 'MIDI not supported in this browser';
+      btn.setAttribute('aria-label', 'MIDI not supported in this browser');
     } else {
       dot.className = 'dot dot-disconnected';
-      lbl.textContent = 'MIDI: not connected';
+      lbl.textContent = 'MIDI';
+      btn.title = 'MIDI: not connected — click to connect';
+      btn.setAttribute('aria-label', 'MIDI: not connected — click to connect');
     }
   }
 

@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- Core services ---- */
   audio     = new AudioEngine();
   midi      = new MIDIHandler();
+  midi.bindStatusButton();
   kbFallback= new KeyboardInputFallback(midi);
   kbFallback.enable();
 
