@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music AI Introduction</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #111111;
+        --surface: #f5f5f5;
+        --button-bg: #111111;
+        --button-text: #ffffff;
+      }
+
+      body.dark-theme {
+        --bg: #111111;
+        --text: #f5f5f5;
+        --surface: #1a1a1a;
+        --button-bg: #f5f5f5;
+        --button-text: #111111;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .theme-toggle {
+        border: 0;
+        border-radius: 999px;
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+        background: var(--button-bg);
+        color: var(--button-text);
+      }
+
+      .theme-toggle:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 2px;
+      }
+
+      .slide {
+        background: var(--surface);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-top: 1.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="controls">
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          Toggle theme
+        </button>
+      </div>
+
+      <section class="slide">
+        <h1>Music AI Introduction</h1>
+        <p>Explore how AI helps with composition, generation, and analysis.</p>
+      </section>
+    </main>
+
+    <script>
+      const themeToggle = document.getElementById('theme-toggle');
+      const savedTheme = localStorage.getItem('theme');
+
+      const updateToggleButtonState = () => {
+        const isDark = document.body.classList.contains('dark-theme');
+        const nextThemeText = isDark
+          ? 'Switch to light theme'
+          : 'Switch to dark theme';
+        themeToggle.textContent = nextThemeText;
+        themeToggle.setAttribute(
+          'aria-label',
+          isDark
+            ? 'Current theme: dark. Switch to light theme'
+            : 'Current theme: light. Switch to dark theme',
+        );
+      };
+
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        localStorage.setItem(
+          'theme',
+          document.body.classList.contains('dark-theme') ? 'dark' : 'light',
+        );
+        updateToggleButtonState();
+      });
+
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+      } else if (savedTheme === 'light') {
+        document.body.classList.remove('dark-theme');
+      } else if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        document.body.classList.add('dark-theme');
+      }
+
+      updateToggleButtonState();
+    </script>
+  </body>
+</html>

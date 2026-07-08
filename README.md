@@ -1,5 +1,9 @@
 # Music-AI-introduction
 
+Simple presentation starter with a built-in dark/light theme switch.
+
+Open `/index.html` in a browser and use the **Toggle theme** button.
+
 ## MishMash – Centre for AI and Creativity
 
 [MishMash](https://mishmash.no/) is a Norwegian national research centre dedicated to exploring the intersection of artificial intelligence and creativity, with a particular focus on music and the arts.
