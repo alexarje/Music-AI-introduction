@@ -463,6 +463,44 @@
     </aside>
   </section>
 
+  <!-- 2.6b Diffusion models (audio) -->
+  <section>
+    <h2>Diffusion Models for Audio (2022–2024)</h2>
+    <div class="two-col" style="margin-top:0.8em">
+      <div>
+        <div class="card">
+          <h4>Core idea</h4>
+          <p>Learn to <strong>denoise</strong> step-by-step: start from noise and iteratively refine into audio (or spectrograms).</p>
+        </div>
+        <div class="card">
+          <h4>Examples</h4>
+          <p>
+            <strong>Riffusion</strong> (spectrogram diffusion),
+            <strong>Stable Audio</strong> (commercial),
+            <strong>AudioCraft</strong> (Meta).
+          </p>
+        </div>
+      </div>
+      <div>
+        <table class="comparison-table" style="font-size:0.78em">
+          <thead>
+            <tr><th>Model family</th><th>Speed</th><th>Quality</th><th>Control</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Transformers</td><td>Fast</td><td>High</td><td>Medium</td></tr>
+            <tr><td>Diffusion</td><td>Slower</td><td>Very high</td><td>Medium–High</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.7em;color:#475569;margin-top:0.6em">
+          Diffusion often shines for <strong>audio fidelity</strong>, but can be heavier to run in real-time.
+        </p>
+      </div>
+    </div>
+    <aside class="notes">
+      Position diffusion as a strong choice for audio realism. Mention trade-offs: sampling steps vs speed, and how conditioning affects controllability.
+    </aside>
+  </section>
+
   <!-- 2.7 DEMO: Magenta Neural Continuation -->
   <section data-demo="neural">
     <h2><span class="badge badge-demo">Demo</span> Neural Melody Continuation — Magenta.js</h2>
