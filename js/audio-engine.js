@@ -86,4 +86,10 @@ class AudioEngine {
     });
     return t; // returns the end time
   }
+
+  /** Stop all sounding notes and clear held state. */
+  killAll() {
+    this.synth.releaseAll();
+    this._held.clear();
+  }
 }

@@ -51,7 +51,18 @@
     }
 
     .floating-control--left { left: 0.75em; }
+    .floating-control--kill { left: 5.5em; }
     .floating-control--right { right: 0.75em; }
+
+    .floating-control--danger {
+      background: rgba(239, 68, 68, 0.18);
+      color: #fecaca;
+    }
+
+    body:not(.dark-theme) .floating-control--danger {
+      background: rgba(239, 68, 68, 0.14);
+      color: #b91c1c;
+    }
 
     .floating-control .dot {
       width: 7px;
@@ -72,6 +83,16 @@
 >
   <span class="dot dot-disconnected" aria-hidden="true"></span>
   <span class="midi-label">MIDI</span>
+</button>
+
+<button
+  class="floating-control floating-control--kill floating-control--danger"
+  id="kill-all-btn"
+  type="button"
+  aria-label="Kill all — stop audio and demos"
+  title="Stop all audio and running demos"
+>
+  Kill all
 </button>
 
 <button

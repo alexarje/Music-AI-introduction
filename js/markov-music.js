@@ -11,6 +11,7 @@ class MarkovMusicGenerator {
     this.piano  = piano;
     this.notes  = [];      // recorded seed notes
     this.recording = false;
+    this._timers = [];
 
     // ---------------------------------------------------------------
     // First-order Markov transition table derived from Bach BWV 846.
@@ -102,6 +103,23 @@ class MarkovMusicGenerator {
     this._setStatus(`Recorded ${this.notes.length} notes. Click Generate to continue.`);
   }
 
+  _schedule(fn, ms) {
+    const id = setTimeout(fn, ms);
+    this._timers.push(id);
+    return id;
+  }
+
+  _clearTimers() {
+    this._timers.forEach(clearTimeout);
+    this._timers = [];
+  }
+
+  kill() {
+    this.recording = false;
+    this._clearTimers();
+    this.piano?.releaseAll();
+  }
+
   noteOn(midiNote, velocity = 100) {
     if (this.recording) this.notes.push(midiNote);
     this.audio.noteOn(midiNote, velocity);
@@ -118,6 +136,7 @@ class MarkovMusicGenerator {
   /* ------------------------------------------------------------------ */
 
   playGenerated() {
+    this._clearTimers();
     const melody = this.generate(this.notes, 24);
     this._showMelody(this.notes, melody.slice(this.notes.length));
     const endTime = this.audio.playSequence(melody, 0.3, 0.04, 0.1);
@@ -125,18 +144,19 @@ class MarkovMusicGenerator {
     // Visualise key presses
     melody.forEach((n, i) => {
       const delay = i * 300 + 100;
-      setTimeout(() => this.piano?.pressKey(n, i < this.notes.length ? '#f97316' : '#7c3aed'), delay);
-      setTimeout(() => this.piano?.releaseKey(n), delay + 270);
+      this._schedule(() => this.piano?.pressKey(n, i < this.notes.length ? '#f97316' : '#7c3aed'), delay);
+      this._schedule(() => this.piano?.releaseKey(n), delay + 270);
     });
     return endTime;
   }
 
   playBachSeed() {
+    this._clearTimers();
     this.notes = [];
     this.audio.playSequence(this.BACH_SEED, 0.25, 0.03, 0.1);
     this.BACH_SEED.forEach((n, i) => {
-      setTimeout(() => this.piano?.pressKey(n, '#f97316'), i * 250 + 100);
-      setTimeout(() => this.piano?.releaseKey(n), i * 250 + 330);
+      this._schedule(() => this.piano?.pressKey(n, '#f97316'), i * 250 + 100);
+      this._schedule(() => this.piano?.releaseKey(n), i * 250 + 330);
     });
     this._setStatus('Playing Bach C-Major Prelude seed (16 notes)…');
     this._showMelody(this.BACH_SEED, []);

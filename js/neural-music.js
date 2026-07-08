@@ -16,6 +16,7 @@ class NeuralMusicDemo {
     this.recording = false;
     this.seed      = [];   // { pitch, startTime, endTime }
     this.seedStep  = 0;    // next start time (in steps of 0.5s)
+    this._timers   = [];
 
     // Magenta checkpoint — hosted by Google, requires internet
     this.CHECKPOINT_URL =
@@ -61,6 +62,24 @@ class NeuralMusicDemo {
   stopRecording() {
     this.recording = false;
     this._setStatus(`Recorded ${this.seed.length} notes. Click <b>Continue</b> to generate!`);
+  }
+
+  _schedule(fn, ms) {
+    const id = setTimeout(fn, ms);
+    this._timers.push(id);
+    return id;
+  }
+
+  _clearTimers() {
+    this._timers.forEach(clearTimeout);
+    this._timers = [];
+  }
+
+  kill() {
+    this.recording = false;
+    this.generating = false;
+    this._clearTimers();
+    this.piano?.releaseAll();
   }
 
   noteOn(midiNote, velocity = 100) {
@@ -124,6 +143,7 @@ class NeuralMusicDemo {
   }
 
   _playContinuation(notes) {
+    this._clearTimers();
     // Show generated chips
     const cont = document.getElementById('nn-continuation');
     if (cont) {
@@ -142,9 +162,9 @@ class NeuralMusicDemo {
         dur,
         Tone.now() + 0.1 + n.startTime
       );
-      setTimeout(() => {
+      this._schedule(() => {
         this.piano?.pressKey(n.pitch, '#7c3aed');
-        setTimeout(() => this.piano?.releaseKey(n.pitch), dur * 1000 + 50);
+        this._schedule(() => this.piano?.releaseKey(n.pitch), dur * 1000 + 50);
       }, startMs);
     });
   }

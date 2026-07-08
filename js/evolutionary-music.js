@@ -18,6 +18,7 @@ class EvolutionaryComposer {
     this.bestFit    = 0;
     this.fitHistory = [];
     this.avgHistory = [];
+    this._timers    = [];
 
     // C major pentatonic + passing tones — pleasant results without extra rules
     this.POOL = [60,62,64,67,69,72,74,76,79,81,64,67,69,72];
@@ -134,6 +135,7 @@ class EvolutionaryComposer {
 
   start(maxGenerations = 80) {
     if (this.running) return;
+    this._clearTimers();
     this.running    = true;
     this.generation = 0;
     this.bestFit    = 0;
@@ -158,15 +160,32 @@ class EvolutionaryComposer {
         this.playMelody(top, 0.18);
       }
 
-      setTimeout(tick, 90);
+      this._schedule(tick, 90);
     };
 
     tick();
   }
 
-  stop() {
+  _schedule(fn, ms) {
+    const id = setTimeout(fn, ms);
+    this._timers.push(id);
+    return id;
+  }
+
+  _clearTimers() {
+    this._timers.forEach(clearTimeout);
+    this._timers = [];
+  }
+
+  kill() {
     this.running = false;
+    this._clearTimers();
     this._updateBtnState(false);
+    this._setStatus('Stopped.');
+  }
+
+  stop() {
+    this.kill();
   }
 
   playBest(noteLen = 0.32) {
@@ -181,10 +200,10 @@ class EvolutionaryComposer {
     const endTime = this.audio.playSequence(mel, noteLen, 0.04, 0.08);
     mel.forEach((n, i) => {
       const d = i * noteLen * 1000 + 80;
-      setTimeout(() => {
+      this._schedule(() => {
         document.querySelectorAll('.piano-key[data-note="' + n + '"]')
           .forEach(el => { el.style.backgroundColor = '#10b981'; });
-        setTimeout(() => {
+        this._schedule(() => {
           document.querySelectorAll('.piano-key[data-note="' + n + '"]')
             .forEach(el => {
               el.style.backgroundColor = '';

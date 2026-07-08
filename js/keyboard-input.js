@@ -43,6 +43,16 @@ class KeyboardInputFallback {
     document.removeEventListener('keyup',   this._onKeyUp);
   }
 
+  releaseAllHeld() {
+    this.heldKeys.forEach(key => {
+      const semitones = this.MAP[key.toLowerCase()];
+      if (semitones === undefined) return;
+      const midiNote = 60 + semitones + this.octave * 12;
+      this.midi.fireNoteOff(midiNote);
+    });
+    this.heldKeys.clear();
+  }
+
   _onKeyDown(e) {
     // Don't interfere with text inputs or reveal.js navigation
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;

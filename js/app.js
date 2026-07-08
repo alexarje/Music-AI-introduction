@@ -22,6 +22,37 @@ function unlockAudio() {
   if (audio) audio.start().catch(() => {});
 }
 
+function killAll() {
+  audio?.killAll();
+  harmonizer?.allNotesOff();
+  pianoRB?.releaseAll();
+  pianoMK?.releaseAll();
+  pianoNN?.releaseAll();
+  markov?.kill();
+  neural?.kill();
+  evo?.kill();
+  kbFallback?.releaseAllHeld();
+
+  const mkRecord = document.getElementById('mk-record');
+  const mkStop = document.getElementById('mk-stop');
+  const mkGenerate = document.getElementById('mk-generate');
+  if (mkRecord) mkRecord.disabled = false;
+  if (mkStop) mkStop.disabled = true;
+  if (mkGenerate) mkGenerate.disabled = markov?.notes?.length > 0;
+
+  const nnRecord = document.getElementById('nn-record');
+  const nnStop = document.getElementById('nn-stop');
+  const nnContinue = document.getElementById('nn-continue');
+  if (nnRecord) nnRecord.disabled = false;
+  if (nnStop) nnStop.disabled = true;
+  if (nnContinue) nnContinue.disabled = !(neural?.seed?.length > 0);
+
+  const evoStart = document.getElementById('evo-start');
+  const evoStop = document.getElementById('evo-stop');
+  if (evoStart) evoStart.disabled = false;
+  if (evoStop) evoStop.disabled = true;
+}
+
 /* ------------------------------------------------------------------ */
 /* Demo activation (called on slide-change)                             */
 /* ------------------------------------------------------------------ */
@@ -183,6 +214,9 @@ function bindButtons() {
     unlockAudio();
     evo.playBest(0.3);
   });
+
+  const killBtn = document.getElementById('kill-all-btn');
+  if (killBtn) killBtn.addEventListener('click', killAll);
 }
 
 /* ------------------------------------------------------------------ */
