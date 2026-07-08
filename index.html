@@ -48,6 +48,11 @@
         color: var(--button-text);
       }
 
+      .theme-toggle:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 2px;
+      }
+
       .slide {
         background: var(--surface);
         border-radius: 12px;
@@ -63,9 +68,9 @@
           class="theme-toggle"
           id="theme-toggle"
           type="button"
-          aria-label="Current theme: light. Switch to dark theme"
+          aria-label="Toggle theme"
         >
-          Switch to dark theme
+          Toggle theme
         </button>
       </div>
 
