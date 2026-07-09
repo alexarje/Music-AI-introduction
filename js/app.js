@@ -487,6 +487,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     controls:       true,
     center:         false,
     transition:     'slide',
+    width:          1280,
+    height:         720,
+    margin:         0.08,
+    minScale:       0.2,
+    maxScale:       1.6,
     plugins: [ RevealHighlight, RevealNotes ]
   });
 

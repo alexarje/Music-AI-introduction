@@ -54,9 +54,11 @@ body.dark-theme {
 
 .reveal .slides section {
   text-align: left;
+  box-sizing: border-box;
+  padding: 0.4em 0.2em;
 }
 
-.reveal h1, .reveal h2, .reveal h3 {
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
   text-transform: none;
   letter-spacing: -0.02em;
   font-weight: 700;
@@ -84,6 +86,7 @@ body.dark-theme {
 .badge-neural  { background: #7c2d12; color: #fed7aa; }
 .badge-evo     { background: #064e3b; color: #a7f3d0; }
 .badge-demo    { background: #1e3a5f; color: #93c5fd; }
+.badge-mishmash{ background: #164e63; color: #a5f3fc; }
 
 /* ---- Section header slides ---- */
 .section-header { text-align: center; }
@@ -109,6 +112,38 @@ body.dark-theme {
   gap: 1em;
   align-items: start;
 }
+
+/* ---- Flow diagrams ---- */
+.flow-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 0.4em 0;
+}
+.flow-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.6em;
+  padding: 0.5em 0.9em;
+  font-size: 0.75em;
+  color: var(--text-main);
+  text-align: center;
+}
+.flow-arrow { color: var(--text-muted); font-size: 1.1em; }
+
+/* ---- Inline SVG illustrations ---- */
+.illustration { display: block; margin: 0.6em auto; max-width: 100%; height: auto; }
+.illustration .node      { fill: var(--card); stroke: var(--border-strong); stroke-width: 1.5; }
+.illustration .node-main { fill: var(--primary); stroke: none; }
+.illustration .box       { fill: var(--card); stroke: var(--border-strong); stroke-width: 1.5; rx: 8; }
+.illustration .box-main  { fill: var(--primary); stroke: none; rx: 8; }
+.illustration text       { font-family: inherit; fill: var(--text-main); }
+.illustration .lbl       { fill: var(--text-muted); }
+.illustration .on-main   { fill: #fff; }
+.illustration .edge      { stroke: var(--secondary); fill: none; }
+.illustration .wave      { stroke: var(--secondary); fill: none; stroke-width: 2; }
+.illustration .panel     { fill: var(--surface); stroke: var(--border); rx: 8; }
 
 /* ---- Comparison Table ---- */
 .comparison-table {
@@ -167,8 +202,8 @@ body.dark-theme {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8em;
-  margin: 0.8em 0;
+  gap: 0.5em;
+  margin: 0.5em 0;
 }
 
 .piano-keyboard {
@@ -222,8 +257,8 @@ body.dark-theme {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 0.75em;
-  padding: 1em 1.2em;
-  font-size: 0.85em;
+  padding: 0.8em 1em;
+  font-size: 0.8em;
 }
 
 .demo-controls {
@@ -367,7 +402,7 @@ body.dark-theme {
   border: 1px solid var(--border);
 }
 .evo-stat-card .stat-value {
-  font-size: 1.4em;
+  font-size: 1.1em;
   font-weight: 700;
   color: var(--success);
 }
@@ -385,6 +420,8 @@ canvas.evo-canvas {
   margin: 0.3em 0;
   display: block;
 }
+#evo-roll  { height: 90px; }
+#evo-chart { height: 56px; }
 
 /* ================================================================
    Markov Demo

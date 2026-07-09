@@ -132,47 +132,76 @@
 <div class="reveal">
 <div class="slides">
 
-<!-- ===================== TITLE + MISHMASH (vertical stack) ===================== -->
+<!-- ===================== TITLE ===================== -->
+<section class="title-slide">
+  <div style="margin-top:1em">
+    <h1 style="font-size:2.6em;line-height:1.1">Music &amp;<br>Artificial Intelligence</h1>
+    <p style="color:#94a3b8;font-size:0.8em;margin-top:1.2em">
+      Rules · Learning · Evolution — with live demos
+    </p>
+    <p style="color:#475569;font-size:0.65em;margin-top:2em">
+      Connect a MIDI keyboard or use keyboard keys (Z=C4, ↑/↓ = octave)
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================
+     CHAPTER 0 — MISHMASH
+     ========================================================= -->
 <section>
-  <section class="title-slide">
-    <div style="margin-top:1em">
-      <h1 style="font-size:2.6em;line-height:1.1">Music &amp;<br>Artificial Intelligence</h1>
-      <p style="color:#475569;font-size:0.65em;margin-top:2em">
-        Connect a MIDI keyboard or use keyboard keys (Z=C4, ↑/↓ = octave)
-      </p>
-    </div>
-  </section>
 
-  <section>
+  <!-- 0.1 Chapter header -->
+  <section class="section-header">
+    <div class="section-number">00</div>
     <h2>MishMash</h2>
-    <p style="color:#94a3b8;font-size:0.9em;max-width:960px">
-      A Norwegian national research centre exploring the intersection of
-      <strong>AI</strong> and <strong>creativity</strong>, with a particular focus on
-      <strong>music</strong> and the arts.
-    </p>
-    <p style="margin-top:1.2em">
-      <a href="https://mishmash.no/" target="_blank" style="color:#06b6d4">mishmash.no</a>
-    </p>
-    <p style="color:#475569;font-size:0.7em;margin-top:2em">
-      Founded 2025 · Led by University of Oslo (UiO) · National partners across Norway
+    <p style="color:#94a3b8;font-size:0.85em">A Norwegian Research Centre for AI &amp; Creativity</p>
+    <span class="badge badge-mishmash">About us</span>
+  </section>
+
+  <!-- 0.2 What is MishMash -->
+  <section>
+    <h2>What is MishMash?</h2>
+    <div class="two-col" style="align-items:center;margin-top:0.6em">
+      <div>
+        <p style="color:#94a3b8;font-size:0.9em">
+          A national research centre exploring the intersection of
+          <strong>AI</strong> and <strong>creativity</strong>, with a particular focus on
+          <strong>music</strong> and the arts.
+        </p>
+        <p style="margin-top:1em">
+          <a href="https://mishmash.no/" target="_blank" style="color:#06b6d4">mishmash.no</a>
+        </p>
+        <p style="color:#475569;font-size:0.7em;margin-top:1.5em">
+          Founded 2025 · Led by University of Oslo (UiO) · National partners across Norway
+        </p>
+      </div>
+      <div style="display:flex;gap:1em;align-items:center;justify-content:center;background:#fff;border-radius:0.75em;padding:1em;border:1px solid var(--border)">
+        <img src="images/mishmash-emblem.svg" alt="MishMash emblem — the MishMash Bubble" style="width:46%;max-width:250px">
+        <img src="images/mishmash-cube.svg" alt="MishMash cube showing the seven work packages" style="width:46%;max-width:250px">
+      </div>
+    </div>
+    <p style="color:#475569;font-size:0.65em;margin-top:0.8em">
+      The <strong>Bubble</strong> (emblem) and the <strong>Cube</strong> — seven work packages combining
+      creating, exploring, and reflecting on AI for machines, humans, and society.
     </p>
   </section>
 
+  <!-- 0.3 MishMash & Music AI -->
   <section>
     <h2>MishMash &amp; Music AI</h2>
     <div class="two-col" style="margin-top:0.8em">
       <div class="card">
-        <h4>Co-creative systems</h4>
-        <p>Tools that support musicians in composition, performance, and exploration — not just automation.</p>
+        <h4>🎹 Co-creative systems</h4>
+        <p>Tools that support musicians — not just automation.</p>
       </div>
       <div class="card">
-        <h4>Ethics &amp; society</h4>
-        <p>Copyright, attribution, consent, cultural impact, and responsible deployment of AI in the arts.</p>
+        <h4>⚖️ Ethics &amp; society</h4>
+        <p>Copyright, attribution, consent, and cultural impact.</p>
       </div>
     </div>
     <div class="card" style="margin-top:1em">
-      <h4>Research + practice</h4>
-      <p>Workshops, performances, and funded research fellowships (PhD/postdoc) at the human–AI frontier.</p>
+      <h4>🔬 Research + practice</h4>
+      <p>Workshops, performances, and PhD/postdoc fellowships at the human–AI frontier.</p>
     </div>
   </section>
 </section>
@@ -180,25 +209,29 @@
 <!-- ===================== OVERVIEW ===================== -->
 <section>
   <h2>Three Paradigms</h2>
-  <div class="three-col" style="margin-top:1.2em">
+  <div class="three-col" style="margin-top:1em;text-align:center;font-size:0.85em">
     <div class="card">
+      <div style="font-size:2.2em;line-height:1.2">📐</div>
       <h4>① Rule-Based</h4>
-      <p>Explicit musical knowledge encoded as algorithms. Predictable, transparent, but limited by what the programmer knows.</p>
-      <p style="margin-top:0.5em;color:#a5b4fc;font-size:0.8em">Chord harmonisers · L-systems · Constraint satisfaction</p>
+      <p>Musical knowledge written down as explicit rules.</p>
+      <p style="margin-top:0.5em;color:#a5b4fc;font-size:0.8em">Harmonisers · Counterpoint · L-systems</p>
     </div>
     <div class="card">
-      <h4>② Learning-Based</h4>
-      <p>Statistical patterns and neural networks <em>learn</em> from data. Can capture subtle style without hand-crafted rules.</p>
-      <p style="margin-top:0.5em;color:#fcd34d;font-size:0.8em">Markov chains · RNN/LSTM · Transformers</p>
+      <div style="font-size:2.2em;line-height:1.2">🧠</div>
+      <h4>② Learning</h4>
+      <p>Models <em>learn</em> musical style from data.</p>
+      <p style="margin-top:0.5em;color:#fcd34d;font-size:0.8em">Markov chains · Neural nets · Transformers</p>
     </div>
     <div class="card">
+      <div style="font-size:2.2em;line-height:1.2">🧬</div>
       <h4>③ Evolutionary</h4>
-      <p>Populations of melodies "evolve" via selection, crossover and mutation guided by a fitness function.</p>
+      <p>Melodies <em>evolve</em> by selection and mutation.</p>
       <p style="margin-top:0.5em;color:#86efac;font-size:0.8em">Genetic algorithms · GenJam · Co-evolution</p>
     </div>
   </div>
   <p style="font-size:0.65em;color:#475569;margin-top:1.2em">
-    Press <strong>↓</strong> to explore each section, or <strong>→</strong> to jump to the next
+    Each chapter starts simple and gets progressively more advanced —
+    press <strong>↓</strong> to go deeper, or <strong>→</strong> to skip ahead
   </p>
 </section>
 
@@ -232,42 +265,7 @@
     </aside>
   </section>
 
-  <!-- 1.3 Types -->
-  <section>
-    <h2>Types of Rule-Based Systems</h2>
-    <div class="two-col">
-      <div>
-        <div class="card">
-          <h4>Formal Grammars</h4>
-          <p>Context-free or generative grammars describe valid musical phrase structures — like a syntax for melodies.</p>
-        </div>
-        <div class="card">
-          <h4>L-Systems</h4>
-          <p>Recursive string-rewriting rules (Lindenmayer). Map characters to pitches/durations → fractal-like repetition.</p>
-        </div>
-        <div class="card">
-          <h4>Constraint Satisfaction</h4>
-          <p>Specify what <em>must</em> be true (no parallel fifths, voice range, etc.) and let a solver find solutions. Used in choral harmonisation.</p>
-        </div>
-      </div>
-      <div>
-        <div class="card">
-          <h4>Finite State Machines</h4>
-          <p>States = musical contexts (intro, verse, chorus). Transitions governed by rules or randomness.</p>
-        </div>
-        <div class="card">
-          <h4>Markov Chains</h4>
-          <p>Probabilistic transitions between note states. Trained on data → blurs boundary with learning-based approaches.</p>
-        </div>
-        <div class="card">
-          <h4>Expert Systems</h4>
-          <p>Encode a music theorist's knowledge: voice-leading rules, harmonic function, rhythmic templates.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 1.4 Diatonic harmony rules -->
+  <!-- 1.3 Diatonic harmony rules -->
   <section>
     <h2>Diatonic Harmony: Rules in Action</h2>
     <p style="font-size:0.82em;color:#94a3b8;margin-bottom:0.8em">C-major harmonisation (every note → triad)</p>
@@ -408,7 +406,42 @@
     </aside>
   </section>
 
-  <!-- 1.6 Bach's Counterpoint Rules -->
+  <!-- 1.6 Types (advanced taxonomy) -->
+  <section>
+    <h2>Going Deeper: Families of Rule Systems</h2>
+    <div class="two-col" style="font-size:0.75em;margin-top:0.4em">
+      <div>
+        <div class="card">
+          <h4>Formal Grammars</h4>
+          <p>A "syntax" for valid musical phrases.</p>
+        </div>
+        <div class="card">
+          <h4>L-Systems</h4>
+          <p>Recursive rewriting rules → fractal-like melodies.</p>
+        </div>
+        <div class="card">
+          <h4>Constraint Satisfaction</h4>
+          <p>State what <em>must</em> hold; a solver finds the notes.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h4>Finite State Machines</h4>
+          <p>States = intro / verse / chorus; rules pick transitions.</p>
+        </div>
+        <div class="card">
+          <h4>Expert Systems</h4>
+          <p>A music theorist's knowledge, encoded.</p>
+        </div>
+        <div class="card">
+          <h4>Markov Chains</h4>
+          <p>Probabilistic rules learned from data — the bridge to Chapter 02.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1.7 Bach's Counterpoint Rules -->
   <section>
     <h2>Bach's Voice-Leading Rules</h2>
     <p style="font-size:0.8em;color:#94a3b8">Rules that governed 18th-century counterpoint — and still guide AI music systems today</p>
@@ -443,8 +476,7 @@
   <section data-demo="counterpoint">
     <h2><span class="badge badge-demo">Demo</span> First-Species Counterpoint</h2>
     <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.6em">
-      Record a <em>cantus firmus</em> (lower voice). The algorithm generates an upper counter-melody
-      avoiding parallel fifths/octaves and favouring contrary motion.
+      Record a lower voice — the algorithm adds an upper voice following Bach's rules.
     </p>
     <div class="demo-panel">
       <div class="demo-controls">
@@ -491,29 +523,24 @@
   <!-- 2.2 From rules to learning -->
   <section>
     <h2>From Rules to Data</h2>
-    <div class="two-col">
-      <div>
-        <h3>Rule-Based</h3>
-        <ul style="font-size:0.8em;line-height:1.8">
-          <li>Programmer encodes knowledge</li>
-          <li>Every case must be handled</li>
-          <li>Transparent &amp; deterministic</li>
-          <li>Brittle outside defined scope</li>
-        </ul>
+    <div style="margin-top:1em">
+      <h3 style="font-size:0.9em">Rule-based</h3>
+      <div class="flow-row">
+        <div class="flow-box">🧑‍🏫 Music theorist</div><span class="flow-arrow">→</span>
+        <div class="flow-box">📜 Hand-written rules</div><span class="flow-arrow">→</span>
+        <div class="flow-box">💻 Program</div><span class="flow-arrow">→</span>
+        <div class="flow-box">🎵 Music</div>
       </div>
-      <div>
-        <h3>Learning-Based</h3>
-        <ul style="font-size:0.8em;line-height:1.8">
-          <li>Model learns from examples</li>
-          <li>Generalises to unseen inputs</li>
-          <li>"Black box" — hard to audit</li>
-          <li>Needs large amounts of data</li>
-        </ul>
+      <h3 style="font-size:0.9em;margin-top:0.8em">Learning-based</h3>
+      <div class="flow-row">
+        <div class="flow-box">🎼 Thousands of pieces</div><span class="flow-arrow">→</span>
+        <div class="flow-box">🧠 Model finds the patterns itself</div><span class="flow-arrow">→</span>
+        <div class="flow-box">🎵 Music</div>
       </div>
     </div>
-    <p style="font-size:0.8em;color:#94a3b8;margin-top:1em">
-      Key insight: instead of <em>programming</em> "do not use parallel fifths",
-      we show the model thousands of Bach chorales — it discovers the rule itself.
+    <p style="font-size:0.8em;color:#94a3b8;margin-top:1.4em">
+      Instead of <em>programming</em> "no parallel fifths", we show the model
+      thousands of Bach chorales — it discovers the rule itself.
     </p>
   </section>
 
@@ -521,31 +548,48 @@
   <section>
     <h2>Step 1 — Markov Chains</h2>
     <p style="font-size:0.8em;color:#94a3b8">The simplest statistical music model</p>
-    <div class="two-col" style="margin-top:0.5em">
+    <div class="two-col" style="margin-top:0.5em;align-items:center">
       <div>
-        <p style="font-size:0.8em">A <strong>first-order Markov chain</strong> says:</p>
-        <blockquote style="font-size:0.78em;border-left:3px solid #7c3aed;padding-left:0.8em;color:#c4b5fd">
-          "Given the current note, what is the probability distribution over the next note?"
+        <blockquote style="font-size:0.82em;border-left:3px solid #7c3aed;padding-left:0.8em;color:#c4b5fd">
+          "Given the current note, what is the probability of each possible next note?"
         </blockquote>
-        <ul style="font-size:0.78em;margin-top:0.5em;line-height:1.7">
-          <li>Count transitions in a corpus</li>
-          <li>Normalise to probabilities</li>
-          <li>Sample from distribution at generation time</li>
-          <li>Higher-order: condition on last <em>N</em> notes</li>
+        <ul style="font-size:0.78em;margin-top:0.8em;line-height:1.8">
+          <li>Count note-to-note transitions in a corpus</li>
+          <li>Generate by rolling the dice at each step</li>
+          <li>Higher-order chains remember the last <em>N</em> notes</li>
         </ul>
       </div>
       <div>
-        <div class="card">
-          <h4>Example (C major, from Bach)</h4>
-          <p>After G (scale degree 5), likely next notes:</p>
-          <ul style="font-size:0.78em;line-height:1.6">
-            <li>A → 30% (stepwise up)</li>
-            <li>F → 25% (stepwise down)</li>
-            <li>E → 15% (third down)</li>
-            <li>C → 20% (tonic — cadence)</li>
-            <li>Other → 10%</li>
-          </ul>
-        </div>
+        <svg class="illustration" width="440" height="300" viewBox="0 0 440 300" role="img"
+             aria-label="Markov transition graph: after G, probabilities of moving to A, F, C or E">
+          <defs>
+            <marker id="mk-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--secondary)"></path>
+            </marker>
+          </defs>
+          <line class="edge" x1="105" y1="135" x2="315" y2="50"  stroke-width="5"   marker-end="url(#mk-arrow)"></line>
+          <line class="edge" x1="108" y1="145" x2="315" y2="118" stroke-width="4"   marker-end="url(#mk-arrow)"></line>
+          <line class="edge" x1="108" y1="160" x2="315" y2="186" stroke-width="3.2" marker-end="url(#mk-arrow)"></line>
+          <line class="edge" x1="105" y1="170" x2="315" y2="254" stroke-width="2.2" marker-end="url(#mk-arrow)"></line>
+          <text class="lbl" x="205" y="80"  font-size="15">30%</text>
+          <text class="lbl" x="205" y="122" font-size="15">25%</text>
+          <text class="lbl" x="205" y="188" font-size="15">20%</text>
+          <text class="lbl" x="205" y="232" font-size="15">15%</text>
+          <circle class="node-main" cx="72" cy="152" r="36"></circle>
+          <text class="on-main" x="72" y="160" font-size="26" font-weight="700" text-anchor="middle">G</text>
+          <circle class="node" cx="348" cy="50"  r="27"></circle>
+          <text x="348" y="58"  font-size="20" font-weight="700" text-anchor="middle">A</text>
+          <circle class="node" cx="348" cy="118" r="27"></circle>
+          <text x="348" y="126" font-size="20" font-weight="700" text-anchor="middle">F</text>
+          <circle class="node" cx="348" cy="186" r="27"></circle>
+          <text x="348" y="194" font-size="20" font-weight="700" text-anchor="middle">C</text>
+          <circle class="node" cx="348" cy="254" r="27"></circle>
+          <text x="348" y="262" font-size="20" font-weight="700" text-anchor="middle">E</text>
+        </svg>
+        <p style="font-size:0.65em;color:#475569;text-align:center;margin-top:0.2em">
+          Transitions after G, counted from Bach (C major). Thicker arrow = more likely.
+        </p>
       </div>
     </div>
   </section>
@@ -583,88 +627,37 @@
   <!-- 2.5 Neural Networks -->
   <section>
     <h2>Step 2 — Neural Networks</h2>
-    <p style="font-size:0.8em;color:#94a3b8">Going deeper than Markov chains</p>
-    <div class="two-col" style="margin-top:0.6em">
+    <p style="font-size:0.8em;color:#94a3b8">Going deeper than Markov chains — four families</p>
+    <div class="two-col" style="margin-top:0.4em;font-size:0.8em">
       <div>
         <div class="card">
-          <h4>RNN / LSTM</h4>
-          <p>Processes sequences one step at a time. Hidden state carries "memory" of previous context. Excellent for melody and rhythm modelling.</p>
+          <h4>🔁 RNN / LSTM</h4>
+          <p>Reads notes one at a time, with a "memory" of what came before.</p>
         </div>
         <div class="card">
-          <h4>Transformer</h4>
-          <p>Attention mechanism sees the entire sequence at once. State-of-the-art for long-range musical structure (MuseNet, MusicGen).</p>
+          <h4>👁 Transformer</h4>
+          <p>Sees the whole piece at once via <em>attention</em> — details soon.</p>
         </div>
       </div>
       <div>
         <div class="card">
-          <h4>VAE / GAN</h4>
-          <p>Variational auto-encoders learn a latent space of musical style. Can interpolate between composers or moods.</p>
+          <h4>🗺 VAE / GAN</h4>
+          <p>Learns a "map" of styles you can morph between.</p>
         </div>
         <div class="card">
-          <h4>Diffusion</h4>
-          <p>Learn to reverse a noise process. Increasingly dominant for audio synthesis (Stable Audio, AudioCraft).</p>
+          <h4>🌫 Diffusion</h4>
+          <p>Sculpts music out of pure noise — details soon.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2.6 Landmark systems -->
-  <section>
-    <h2>Landmark AI Music Systems</h2>
-    <ul class="timeline">
-      <li><span class="year">2016</span><span class="event"><strong>Google Magenta</strong> — TensorFlow toolkit for music &amp; art generation. MelodyRNN, MusicVAE, Piano Genie.</span></li>
-      <li><span class="year">2019</span><span class="event"><strong>OpenAI MuseNet</strong> — GPT-2 trained on MIDI. 10 instruments, any style from Mozart to Lady Gaga.</span></li>
-      <li><span class="year">2020</span><span class="event"><strong>OpenAI Jukebox</strong> — raw audio with vocals. 1.2M songs. Highly convincing but slow.</span></li>
-      <li><span class="year">2022</span><span class="event"><strong>Riffusion</strong> — Stable Diffusion on spectrograms. Seamless interpolation between styles.</span></li>
-      <li><span class="year">2023</span><span class="event"><strong>Meta MusicGen</strong> — text/audio-conditioned transformer. Open weights, Apache-2 licence.</span></li>
-      <li><span class="year">2023</span><span class="event"><strong>Google MusicLM</strong> — hierarchical sequence-to-sequence model. Story-prompt → 5-minute piece.</span></li>
-    </ul>
-    <aside class="notes">
-      Demonstrate online: play.aidemos.com for MuseNet, huggingface.co for MusicGen.
-    </aside>
-  </section>
-
-  <!-- 2.6b Diffusion models (audio) -->
-  <section>
-    <h2>Diffusion Models for Audio (2022–2024)</h2>
-    <div class="two-col" style="margin-top:0.8em">
-      <div>
-        <div class="card">
-          <h4>Core idea</h4>
-          <p>Learn to <strong>denoise</strong> step-by-step: start from noise and iteratively refine into audio (or spectrograms).</p>
-        </div>
-        <div class="card">
-          <h4>Examples</h4>
-          <p>
-            <strong>Riffusion</strong> (spectrogram diffusion),
-            <strong>Stable Audio</strong> (commercial),
-            <strong>AudioCraft</strong> (Meta).
-          </p>
-        </div>
-      </div>
-      <div>
-        <table class="comparison-table" style="font-size:0.78em">
-          <thead>
-            <tr><th>Model family</th><th>Speed</th><th>Quality</th><th>Control</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Transformers</td><td>Fast</td><td>High</td><td>Medium</td></tr>
-            <tr><td>Diffusion</td><td>Slower</td><td>Very high</td><td>Medium–High</td></tr>
-          </tbody>
-        </table>
-        <p style="font-size:0.7em;color:#475569;margin-top:0.6em">
-          Diffusion often shines for <strong>audio fidelity</strong>, but can be heavier to run in real-time.
-        </p>
       </div>
     </div>
-    <aside class="notes">
-      Position diffusion as a strong choice for audio realism. Mention trade-offs: sampling steps vs speed, and how conditioning affects controllability.
-    </aside>
+    <p style="font-size:0.7em;color:#475569;margin-top:0.6em">
+      Let's hear one first — then look inside the two families that dominate today.
+    </p>
   </section>
 
-  <!-- 2.7 DEMO: Magenta Neural Continuation -->
+  <!-- 2.6 DEMO: Magenta Neural Continuation -->
   <section data-demo="neural">
-    <h2><span class="badge badge-demo">Demo</span> Neural Melody Continuation — Magenta.js</h2>
+    <h2><span class="badge badge-demo">Demo</span> Neural Melody Continuation</h2>
     <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.4em">
       Google Magenta's <em>melody_rnn</em> (LSTM) runs entirely in the browser.
     </p>
@@ -703,9 +696,9 @@
 
   <!-- 2.7b DEMO: Piano Genie (Issue #10) -->
   <section data-demo="piano-genie">
-    <h2><span class="badge badge-demo">Demo</span> Piano Genie — 8-Button Expressive Piano</h2>
+    <h2><span class="badge badge-demo">Demo</span> Piano Genie</h2>
     <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.6em">
-      Inspired by Magenta Piano Genie: 8 coarse buttons map to expressive piano notes via a latent space.
+      8 coarse buttons map to expressive piano notes via a latent space (after Magenta's Piano Genie).
     </p>
     <div class="demo-panel">
       <div class="genie-buttons" id="pg-buttons">
@@ -726,39 +719,147 @@
     </div>
   </section>
 
-  <!-- 2.8 Listen to AI Music -->
+  <!-- 2.8 Transformers explained -->
   <section>
-    <h2>Listen: Neural Network Music Examples</h2>
-    <div class="two-col" style="margin-top:0.5em">
-      <div>
-        <div class="card">
-          <h4>🎹 MuseNet — Beethoven style</h4>
-          <p>OpenAI GPT-2 trained on classical MIDI. <a href="https://openai.com/index/musenet/" target="_blank">openai.com/musenet</a></p>
-        </div>
-        <div class="card">
-          <h4>🎸 Jukebox — Rock with vocals</h4>
-          <p>Raw audio generation at 44 kHz. <a href="https://openai.com/index/jukebox/" target="_blank">openai.com/jukebox</a></p>
-        </div>
-        <div class="card">
-          <h4>🎼 MusicGen — Text to music</h4>
-          <p>"80s pop with synthesiser and drum machine" → music. <a href="https://huggingface.co/spaces/facebook/MusicGen" target="_blank">Try on HuggingFace</a></p>
-        </div>
+    <h2>Inside a Transformer</h2>
+    <p style="font-size:0.8em;color:#94a3b8">
+      To predict the next note, <strong>attention</strong> weighs every previous note — near and far.
+    </p>
+    <svg class="illustration" width="660" height="226" viewBox="0 0 760 260" role="img"
+         aria-label="Attention diagram: the predicted next note attends to all previous notes with different weights">
+      <path class="edge" d="M 650 180 Q 575 115 500 180" stroke-width="6.5"></path>
+      <path class="edge" d="M 650 180 Q 520 85 390 180"  stroke-width="2"></path>
+      <path class="edge" d="M 650 180 Q 465 55 280 180"  stroke-width="5"></path>
+      <path class="edge" d="M 650 180 Q 410 35 170 180"  stroke-width="1.2"></path>
+      <path class="edge" d="M 650 180 Q 355 20 60 180"   stroke-width="2.5"></path>
+      <g font-size="20" font-weight="700" text-anchor="middle">
+        <rect class="box" x="28"  y="190" width="64" height="44" rx="8"></rect>
+        <text x="60"  y="219">C4</text>
+        <rect class="box" x="138" y="190" width="64" height="44" rx="8"></rect>
+        <text x="170" y="219">E4</text>
+        <rect class="box" x="248" y="190" width="64" height="44" rx="8"></rect>
+        <text x="280" y="219">G4</text>
+        <rect class="box" x="358" y="190" width="64" height="44" rx="8"></rect>
+        <text x="390" y="219">C5</text>
+        <rect class="box" x="468" y="190" width="64" height="44" rx="8"></rect>
+        <text x="500" y="219">A4</text>
+        <rect class="box-main" x="618" y="190" width="64" height="44" rx="8"></rect>
+        <text class="on-main" x="650" y="219">?</text>
+      </g>
+      <text class="lbl" x="360" y="252" font-size="13">thicker arc = more attention</text>
+    </svg>
+    <div class="three-col" style="font-size:0.75em">
+      <div class="card"><h4>Long memory</h4><p>Can "look back" at a theme from minutes ago.</p></div>
+      <div class="card"><h4>Music as language</h4><p>Notes become tokens — same architecture as ChatGPT.</p></div>
+      <div class="card"><h4>Used by</h4><p>MuseNet, MusicGen, MusicLM, Suno, Udio.</p></div>
+    </div>
+    <aside class="notes">
+      Bridge from the LSTM demo: the LSTM only carries a compressed memory forward, while attention
+      lets the model directly revisit any earlier note. This is why transformers handle long-range structure.
+    </aside>
+  </section>
+
+  <!-- 2.9 Diffusion explained -->
+  <section>
+    <h2>Inside a Diffusion Model</h2>
+    <p style="font-size:0.8em;color:#94a3b8">
+      Generate audio by learning to <strong>remove noise</strong>, step by step.
+    </p>
+    <svg class="illustration" width="700" height="130" viewBox="0 0 700 130" role="img"
+         aria-label="Denoising illustration: pure noise is refined over steps into a clean waveform">
+      <defs>
+        <marker id="df-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted)"></path>
+        </marker>
+      </defs>
+      <g transform="translate(0,15)">
+        <rect class="panel" x="0" y="0" width="130" height="70" rx="8"></rect>
+        <polyline class="wave" points="0.0,26.9 3.2,61.0 6.5,45.1 9.8,46.8 13.0,16.0 16.2,18.7 19.5,6.0 22.8,52.5 26.0,33.3 29.2,56.7 32.5,46.7 35.8,31.3 39.0,60.4 42.2,52.0 45.5,27.3 48.8,34.9 52.0,55.0 55.2,34.8 58.5,22.9 61.8,64.0 65.0,23.8 68.2,29.9 71.5,50.1 74.8,59.9 78.0,12.3 81.2,47.0 84.5,59.6 87.8,57.9 91.0,12.8 94.2,25.6 97.5,12.6 100.8,16.1 104.0,26.7 107.2,6.0 110.5,35.6 113.8,26.0 117.0,10.6 120.2,23.9 123.5,11.1 126.8,29.0 130.0,23.1"></polyline>
+        <text class="lbl" x="65" y="92" font-size="13" text-anchor="middle">pure noise</text>
+      </g>
+      <line x1="142" y1="50" x2="178" y2="50" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#df-arrow)"></line>
+      <g transform="translate(190,15)">
+        <rect class="panel" x="0" y="0" width="130" height="70" rx="8"></rect>
+        <polyline class="wave" points="0.0,50.8 3.2,41.5 6.5,36.6 9.8,41.4 13.0,34.1 16.2,37.2 19.5,30.3 22.8,17.7 26.0,27.7 29.2,28.8 32.5,36.2 35.8,36.5 39.0,15.9 42.2,28.9 45.5,33.2 48.8,51.3 52.0,34.4 55.2,56.3 58.5,50.4 61.8,30.2 65.0,42.7 68.2,45.3 71.5,39.8 74.8,32.7 78.0,32.8 81.2,49.3 84.5,53.3 87.8,40.4 91.0,39.2 94.2,38.5 97.5,10.7 100.8,11.1 104.0,29.5 107.2,17.0 110.5,26.2 113.8,8.9 117.0,26.2 120.2,35.0 123.5,38.1 126.8,29.9 130.0,43.3"></polyline>
+        <text class="lbl" x="65" y="92" font-size="13" text-anchor="middle">step 10</text>
+      </g>
+      <line x1="332" y1="50" x2="368" y2="50" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#df-arrow)"></line>
+      <g transform="translate(380,15)">
+        <rect class="panel" x="0" y="0" width="130" height="70" rx="8"></rect>
+        <polyline class="wave" points="0.0,33.8 3.2,25.0 6.5,28.3 9.8,27.4 13.0,13.3 16.2,18.3 19.5,23.2 22.8,23.7 26.0,23.6 29.2,17.9 32.5,18.1 35.8,26.8 39.0,35.8 42.2,35.3 45.5,30.6 48.8,41.4 52.0,38.7 55.2,43.4 58.5,58.1 61.8,49.2 65.0,50.3 68.2,51.9 71.5,54.4 74.8,46.6 78.0,51.2 81.2,42.8 84.5,38.5 87.8,27.0 91.0,24.0 94.2,29.1 97.5,22.3 100.8,24.4 104.0,12.0 107.2,11.7 110.5,20.2 113.8,16.4 117.0,18.9 120.2,28.4 123.5,23.0 126.8,30.2 130.0,31.0"></polyline>
+        <text class="lbl" x="65" y="92" font-size="13" text-anchor="middle">step 40</text>
+      </g>
+      <line x1="522" y1="50" x2="558" y2="50" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#df-arrow)"></line>
+      <g transform="translate(570,15)">
+        <rect class="panel" x="0" y="0" width="130" height="70" rx="8"></rect>
+        <polyline class="wave" points="0.0,35.0 3.2,29.9 6.5,25.1 9.8,20.9 13.0,17.4 16.2,14.9 19.5,13.5 22.8,13.3 26.0,14.3 29.2,16.5 32.5,19.6 35.8,23.6 39.0,28.3 42.2,33.3 45.5,38.4 48.8,43.3 52.0,47.8 55.2,51.5 58.5,54.4 61.8,56.1 65.0,56.8 68.2,56.1 71.5,54.4 74.8,51.5 78.0,47.8 81.2,43.3 84.5,38.4 87.8,33.3 91.0,28.3 94.2,23.6 97.5,19.6 100.8,16.5 104.0,14.3 107.2,13.3 110.5,13.5 113.8,14.9 117.0,17.4 120.2,20.9 123.5,25.1 126.8,29.9 130.0,35.0"></polyline>
+        <text class="lbl" x="65" y="92" font-size="13" text-anchor="middle">🎵 audio</text>
+      </g>
+    </svg>
+    <div class="three-col" style="font-size:0.8em;margin-top:0.4em">
+      <div class="card"><h4>Training</h4><p>Add noise to real music; learn to undo it.</p></div>
+      <div class="card"><h4>Generation</h4><p>Start from random noise, denoise ~50 steps.</p></div>
+      <div class="card"><h4>Used by</h4><p>Riffusion, Stable Audio, AudioCraft.</p></div>
+    </div>
+    <p style="font-size:0.7em;color:#475569;margin-top:0.5em">
+      Trade-off vs transformers: superb audio fidelity, but many steps → slower, harder in real-time.
+    </p>
+    <aside class="notes">
+      Same idea as image diffusion (Stable Diffusion, Midjourney) applied to sound — Riffusion literally
+      runs image diffusion on spectrograms. Mention the steps-vs-speed trade-off.
+    </aside>
+  </section>
+
+  <!-- 2.10 Landmark systems -->
+  <section>
+    <h2>Landmark AI Music Systems</h2>
+    <ul class="timeline">
+      <li><span class="year">2016</span><span class="event"><strong>Google Magenta</strong> — open-source toolkit: MelodyRNN, MusicVAE, Piano Genie.</span></li>
+      <li><span class="year">2019</span><span class="event"><strong>OpenAI MuseNet</strong> — GPT-2 on MIDI: any style from Mozart to Lady Gaga.</span></li>
+      <li><span class="year">2020</span><span class="event"><strong>OpenAI Jukebox</strong> — raw audio with vocals; convincing but slow.</span></li>
+      <li><span class="year">2022</span><span class="event"><strong>Riffusion</strong> — Stable Diffusion on spectrograms.</span></li>
+      <li><span class="year">2023</span><span class="event"><strong>Meta MusicGen</strong> — text-to-music transformer, open weights.</span></li>
+      <li><span class="year">2024</span><span class="event"><strong>Suno &amp; Udio</strong> — full songs with vocals from a text prompt, for everyone.</span></li>
+    </ul>
+    <aside class="notes">
+      Demonstrate online: huggingface.co for MusicGen, suno.com / udio.com for full songs.
+    </aside>
+  </section>
+
+  <!-- 2.11 Listen to AI Music -->
+  <section>
+    <h2>Listen: AI Music Examples</h2>
+    <div class="three-col" style="font-size:0.85em;margin-top:0.8em">
+      <div class="card">
+        <h4>🎹 MuseNet</h4>
+        <p>GPT-2 on classical MIDI. <a href="https://openai.com/index/musenet/" target="_blank">openai.com</a></p>
       </div>
-      <div>
-        <div class="card">
-          <h4>🎹 Piano Genie (Magenta)</h4>
-          <p>8 buttons → expressive piano. Neural mapping from coarse to fine gestures. <a href="https://piano-genie.glitch.me" target="_blank">piano-genie.glitch.me</a></p>
-        </div>
-        <div class="card">
-          <h4>🎵 Riffusion</h4>
-          <p>Latent diffusion on spectrograms — smooth interpolation between styles. <a href="https://www.riffusion.com" target="_blank">riffusion.com</a></p>
-        </div>
-        <div class="card">
-          <h4>🎼 Bach Doodle (Coconet)</h4>
-          <p>Harmonise a melody in Bach's style — runs in browser. <a href="https://g.co/arts/BachDoodle" target="_blank">g.co/arts/BachDoodle</a></p>
-        </div>
+      <div class="card">
+        <h4>🎸 Jukebox</h4>
+        <p>Raw audio with vocals. <a href="https://openai.com/index/jukebox/" target="_blank">openai.com</a></p>
+      </div>
+      <div class="card">
+        <h4>🎼 MusicGen</h4>
+        <p>Text prompt → music. <a href="https://huggingface.co/spaces/facebook/MusicGen" target="_blank">HuggingFace</a></p>
+      </div>
+      <div class="card">
+        <h4>🎹 Piano Genie</h4>
+        <p>8 buttons → piano. <a href="https://piano-genie.glitch.me" target="_blank">glitch.me</a></p>
+      </div>
+      <div class="card">
+        <h4>🎵 Riffusion</h4>
+        <p>Diffusion on spectrograms. <a href="https://www.riffusion.com" target="_blank">riffusion.com</a></p>
+      </div>
+      <div class="card">
+        <h4>🎼 Bach Doodle</h4>
+        <p>Harmonise like Bach. <a href="https://g.co/arts/BachDoodle" target="_blank">g.co/arts</a></p>
       </div>
     </div>
+    <p style="font-size:0.7em;color:#475569;margin-top:0.8em">
+      For full songs from a text prompt, try <a href="https://suno.com" target="_blank">suno.com</a>
+      or <a href="https://udio.com" target="_blank">udio.com</a> live with the audience.
+    </p>
   </section>
 
 </section><!-- /section 2 -->
@@ -781,29 +882,27 @@
     <h2>Genetic Algorithms in Music</h2>
     <div class="two-col">
       <div>
-        <h3>Biological metaphor</h3>
-        <ul style="font-size:0.8em;line-height:1.9">
-          <li><strong>Chromosome</strong> = a melody (sequence of notes)</li>
-          <li><strong>Gene</strong> = individual note (pitch + duration)</li>
+        <h3 style="font-size:1em">Biological metaphor</h3>
+        <ul style="font-size:0.72em;line-height:1.7">
+          <li><strong>Melody</strong> = chromosome · <strong>note</strong> = gene</li>
           <li><strong>Population</strong> = 20–100 candidate melodies</li>
           <li><strong>Fitness</strong> = "how musical is this melody?"</li>
-          <li><strong>Selection</strong> = best melodies have more children</li>
-          <li><strong>Crossover</strong> = splice two melodies together</li>
-          <li><strong>Mutation</strong> = randomly change a note</li>
+          <li><strong>Selection</strong> — the best get more children</li>
+          <li><strong>Crossover + mutation</strong> make the next generation</li>
         </ul>
       </div>
       <div>
-        <h3>The cycle</h3>
-        <div style="text-align:center;font-size:0.82em;line-height:2;color:#94a3b8">
-          <div style="background:#1e1b4b;border-radius:6px;padding:0.3em;margin:0.2em 0">🎲 Random population</div>
+        <h3 style="font-size:1em">The cycle</h3>
+        <div style="text-align:center;font-size:0.7em;line-height:1.5;color:var(--text-muted)">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:0.25em;margin:0.15em 0;color:var(--text-main)">🎲 Random population</div>
           <div>↓</div>
-          <div style="background:#1e1b4b;border-radius:6px;padding:0.3em;margin:0.2em 0">📊 Evaluate fitness</div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:0.25em;margin:0.15em 0;color:var(--text-main)">📊 Evaluate fitness</div>
           <div>↓</div>
-          <div style="background:#1e1b4b;border-radius:6px;padding:0.3em;margin:0.2em 0">🏆 Select best</div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:0.25em;margin:0.15em 0;color:var(--text-main)">🏆 Select best</div>
           <div>↓</div>
-          <div style="background:#1e1b4b;border-radius:6px;padding:0.3em;margin:0.2em 0">🧬 Crossover + Mutate</div>
-          <div>↓ (repeat 50–500 generations)</div>
-          <div style="background:#064e3b;border-radius:6px;padding:0.3em;margin:0.2em 0">🎶 Best melody</div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:0.25em;margin:0.15em 0;color:var(--text-main)">🧬 Crossover + Mutate</div>
+          <div>↓ repeat 50–500 generations</div>
+          <div style="background:#064e3b;border-radius:6px;padding:0.25em;margin:0.15em 0;color:#a7f3d0">🎶 Best melody</div>
         </div>
       </div>
     </div>
@@ -817,49 +916,31 @@
       <div>
         <div class="card">
           <h4>Objective (rule-based)</h4>
-          <ul style="font-size:0.8em;line-height:1.7">
-            <li>✅ Prefer step-wise motion</li>
-            <li>✅ Pitch range within 1–1.5 octaves</li>
-            <li>✅ Pitch variety (avoid monotone)</li>
+          <ul style="font-size:0.72em;line-height:1.7">
+            <li>✅ Step-wise motion, arch shape</li>
+            <li>✅ Stay within ~1.5 octaves</li>
             <li>✅ End on tonic or fifth</li>
-            <li>✅ Arch shape (rise then fall)</li>
-            <li>❌ Penalise large consecutive leaps</li>
+            <li>❌ Penalise large leaps</li>
           </ul>
         </div>
       </div>
       <div>
         <div class="card">
           <h4>Subjective (interactive EA)</h4>
-          <ul style="font-size:0.8em;line-height:1.7">
-            <li>👂 Human rates melodies 1–10</li>
-            <li>🤖 OR: learned preference model</li>
-            <li>🎭 GenJam (Biles 1994): audience feedback</li>
-            <li>💡 Fitness landscape is non-stationary</li>
-            <li>⚠ Expensive to evaluate</li>
+          <ul style="font-size:0.72em;line-height:1.7">
+            <li>👂 Humans rate melodies 1–10</li>
+            <li>🎭 GenJam: live audience feedback</li>
+            <li>⚠ Slow, and taste keeps shifting</li>
           </ul>
-        </div>
-        <div class="card">
-          <h4>Combined</h4>
-          <p style="font-size:0.8em">Mix rule-based fitness with neural-network beauty scorer — best of both worlds.</p>
         </div>
       </div>
     </div>
+    <p style="font-size:0.75em;color:#94a3b8;margin-top:0.8em">
+      💡 <strong>Combined:</strong> rules + a learned "beauty scorer" — best of both worlds.
+    </p>
   </section>
 
-  <!-- 3.4 History -->
-  <section>
-    <h2>Historical Evolutionary Systems</h2>
-    <ul class="timeline">
-      <li><span class="year">1994</span><span class="event"><strong>GenJam</strong> (John Biles) — genetic jazz improv system. Audience ratings guide fitness in real-time performance.</span></li>
-      <li><span class="year">1995</span><span class="event"><strong>Evolutionary Music</strong> (Horner &amp; Goldberg) — GA applied to four-voice harmonisation.</span></li>
-      <li><span class="year">2001</span><span class="event"><strong>NEUROGEN</strong> — evolves neural network weights that produce melodies fitting an aesthetic model.</span></li>
-      <li><span class="year">2007</span><span class="event"><strong>Impro-Visor</strong> (Keller et al.) — combines rule-based constraints with evolutionary search for jazz solos.</span></li>
-      <li><span class="year">2018</span><span class="event"><strong>CMA-ES for composition</strong> — covariance matrix adaptation for polyphonic music.</span></li>
-      <li><span class="year">Now</span><span class="event">Hybrid systems combining GA fitness with neural style embeddings (CLIP-like music critics).</span></li>
-    </ul>
-  </section>
-
-  <!-- 3.5 DEMO: Evolutionary Composer -->
+  <!-- 3.4 DEMO: Evolutionary Composer -->
   <section data-demo="evo">
     <h2><span class="badge badge-demo">Demo</span> Genetic Algorithm Melody Evolution</h2>
     <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.5em">
@@ -913,6 +994,19 @@
       Run for 80 generations. At each 10th generation the best melody is played automatically.
       Show how fitness increases and the piano roll becomes more "melodic" looking.
     </aside>
+  </section>
+
+  <!-- 3.5 History (advanced) -->
+  <section>
+    <h2>Going Deeper: Evolutionary Systems</h2>
+    <ul class="timeline">
+      <li><span class="year">1994</span><span class="event"><strong>GenJam</strong> (John Biles) — genetic jazz improv; audience ratings guide fitness live.</span></li>
+      <li><span class="year">1995</span><span class="event"><strong>Horner &amp; Goldberg</strong> — GA applied to four-voice harmonisation.</span></li>
+      <li><span class="year">2001</span><span class="event"><strong>NEUROGEN</strong> — evolves neural-network weights that produce melodies.</span></li>
+      <li><span class="year">2007</span><span class="event"><strong>Impro-Visor</strong> — rule-based constraints + evolutionary search for jazz solos.</span></li>
+      <li><span class="year">2018</span><span class="event"><strong>CMA-ES</strong> — covariance matrix adaptation for polyphonic music.</span></li>
+      <li><span class="year">Now</span><span class="event">Hybrids: GA fitness from neural style embeddings (CLIP-like music critics).</span></li>
+    </ul>
   </section>
 
 </section><!-- /section 3 -->
@@ -977,13 +1071,13 @@
 
   <!-- Current state -->
   <section>
-    <h2>Where Are We Now? (2024)</h2>
+    <h2>Where Are We Now? (2026)</h2>
     <div class="two-col">
       <div>
         <h3>What works well</h3>
         <ul style="font-size:0.8em;line-height:1.8">
-          <li>Short-form generation (8–30 s)</li>
-          <li>Style imitation from text prompts</li>
+          <li>Full songs from text prompts (Suno, Udio)</li>
+          <li>Style imitation &amp; genre blending</li>
           <li>Real-time MIDI assistance (Magenta)</li>
           <li>Accompaniment &amp; chord harmonisation</li>
           <li>Drum patterns &amp; rhythm generation</li>
@@ -1005,9 +1099,9 @@
   <!-- Resources -->
   <section>
     <h2>Resources &amp; Further Reading</h2>
-    <div class="three-col" style="font-size:0.78em">
+    <div class="three-col" style="font-size:0.65em">
       <div>
-        <h3>Tools</h3>
+        <h3 style="font-size:1.2em">Tools</h3>
         <ul style="line-height:1.9">
           <li><a href="https://magenta.tensorflow.org" target="_blank">Magenta</a></li>
           <li><a href="https://tonejs.github.io" target="_blank">Tone.js</a></li>
@@ -1017,16 +1111,16 @@
         </ul>
       </div>
       <div>
-        <h3>Papers</h3>
+        <h3 style="font-size:1.2em">Papers</h3>
         <ul style="line-height:1.9">
-          <li>Briot et al., <em>Deep Learning for Music Generation</em> (2020)</li>
-          <li>Herremans et al., <em>A Functional Taxonomy of Music Generation Systems</em></li>
-          <li>Biles, <em>GenJam: A Genetic Algorithm for Generating Jazz Solos</em> (1994)</li>
-          <li>Copet et al., <em>Simple and Controllable Music Generation</em> (MusicGen, 2023)</li>
+          <li>Briot et al. (2020) — <em>Deep Learning for Music Generation</em></li>
+          <li>Herremans et al. — <em>Taxonomy of Music Generation Systems</em></li>
+          <li>Biles (1994) — <em>GenJam</em></li>
+          <li>Copet et al. (2023) — <em>MusicGen</em></li>
         </ul>
       </div>
       <div>
-        <h3>Demos</h3>
+        <h3 style="font-size:1.2em">Demos</h3>
         <ul style="line-height:1.9">
           <li><a href="https://g.co/arts/BachDoodle" target="_blank">Bach Doodle</a></li>
           <li><a href="https://piano-genie.glitch.me" target="_blank">Piano Genie</a></li>
