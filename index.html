@@ -139,10 +139,28 @@
     <p style="color:#94a3b8;font-size:0.8em;margin-top:1.2em">
       Rules · Learning · Evolution — with live demos
     </p>
-    <p style="color:#475569;font-size:0.65em;margin-top:2em">
+    <p class="hint">
       Connect a MIDI keyboard or use keyboard keys (Z=C4, ↑/↓ = octave)
     </p>
   </div>
+</section>
+
+<!-- ===================== COLD OPEN ===================== -->
+<section class="title-slide">
+  <h2 style="margin-top:1.2em">🎧 Human or Machine?</h2>
+  <p class="sub" style="font-size:0.9em;margin-top:1em">
+    Listen to a short clip. Who made it?
+  </p>
+  <p style="margin-top:1.5em">
+    <a href="https://suno.com" target="_blank">suno.com</a>
+  </p>
+  <p class="hint">
+    Every song there was generated from a text prompt.
+  </p>
+  <aside class="notes">
+    Play 20–30 seconds of a Suno track before saying anything. Show of hands: human or machine?
+    Then reveal — and promise that by the end everyone will know how this works.
+  </aside>
 </section>
 
 <!-- =========================================================
@@ -154,7 +172,7 @@
   <section class="section-header">
     <div class="section-number">00</div>
     <h2>MishMash</h2>
-    <p style="color:#94a3b8;font-size:0.85em">A Norwegian Research Centre for AI &amp; Creativity</p>
+    <p class="sub sub--lg">A Norwegian Research Centre for AI &amp; Creativity</p>
     <span class="badge badge-mishmash">About us</span>
   </section>
 
@@ -169,9 +187,9 @@
           <strong>music</strong> and the arts.
         </p>
         <p style="margin-top:1em">
-          <a href="https://mishmash.no/" target="_blank" style="color:#06b6d4">mishmash.no</a>
+          <a href="https://mishmash.no/" target="_blank">mishmash.no</a>
         </p>
-        <p style="color:#475569;font-size:0.7em;margin-top:1.5em">
+        <p class="hint" style="font-size:0.7em;margin-top:1.5em">
           Founded 2025 · Led by University of Oslo (UiO) · National partners across Norway
         </p>
       </div>
@@ -206,30 +224,87 @@
   </section>
 </section>
 
+<!-- ===================== WHAT IS AI ===================== -->
+<section>
+  <h2>What Do We Mean by "AI"?</h2>
+  <p class="sub">
+    A spectrum — from fully <strong>programmed</strong> to fully <strong>learned</strong>.
+  </p>
+  <div class="flow-row flow-row--compact" style="margin-top:1.4em">
+    <div class="flow-box">🖩 Calculator<br><span class="flow-sub">all rules</span></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">♟ Chess engine<br><span class="flow-sub">rules + search</span></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">📬 Spam filter<br><span class="flow-sub">learned from examples</span></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">🎼 Music AI<br><span class="flow-sub">learned + creative</span></div>
+  </div>
+  <p class="sub-note" style="margin-top:1.4em">
+    Today's question: where does <em>music-making</em> sit on this spectrum — and what changes as we move right?
+  </p>
+</section>
+
+<!-- ===================== SYMBOLIC VS AUDIO ===================== -->
+<section>
+  <h2>Two Ways to Represent Music</h2>
+  <div class="two-col" style="margin-top:0.8em;font-size:0.8em">
+    <div class="card">
+      <h4>🎹 Symbolic (MIDI)</h4>
+      <svg class="illustration" width="320" height="90" viewBox="0 0 320 90" role="img" aria-label="Piano roll with four note blocks">
+        <rect class="panel" x="0" y="0" width="320" height="90" rx="8"></rect>
+        <rect x="20"  y="62" width="56" height="12" rx="3" fill="var(--primary)"></rect>
+        <rect x="90"  y="44" width="56" height="12" rx="3" fill="var(--primary)"></rect>
+        <rect x="160" y="26" width="56" height="12" rx="3" fill="var(--primary)"></rect>
+        <rect x="230" y="12" width="70" height="12" rx="3" fill="var(--secondary)"></rect>
+      </svg>
+      <ul class="list-compact" style="font-size:1em;margin-top:0.4em">
+        <li><em>Instructions</em>: pitch, duration, loudness</li>
+        <li>Tiny files, easy to edit &amp; analyse</li>
+        <li>Needs an instrument to make sound</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🔊 Audio</h4>
+      <svg class="illustration" width="320" height="90" viewBox="0 0 130 70" preserveAspectRatio="none" role="img" aria-label="Audio waveform">
+        <rect class="panel" x="0" y="0" width="130" height="70" rx="4"></rect>
+        <polyline class="wave" points="0.0,33.8 3.2,25.0 6.5,28.3 9.8,27.4 13.0,13.3 16.2,18.3 19.5,23.2 22.8,23.7 26.0,23.6 29.2,17.9 32.5,18.1 35.8,26.8 39.0,35.8 42.2,35.3 45.5,30.6 48.8,41.4 52.0,38.7 55.2,43.4 58.5,58.1 61.8,49.2 65.0,50.3 68.2,51.9 71.5,54.4 74.8,46.6 78.0,51.2 81.2,42.8 84.5,38.5 87.8,27.0 91.0,24.0 94.2,29.1 97.5,22.3 100.8,24.4 104.0,12.0 107.2,11.7 110.5,20.2 113.8,16.4 117.0,18.9 120.2,28.4 123.5,23.0 126.8,30.2 130.0,31.0"></polyline>
+      </svg>
+      <ul class="list-compact" style="font-size:1em;margin-top:0.4em">
+        <li><em>The sound itself</em>: 44 100 numbers/second</li>
+        <li>Captures voice, timbre, room, expression</li>
+        <li>Big, and hard to edit one note</li>
+      </ul>
+    </div>
+  </div>
+  <p class="footnote">
+    Our demos are MIDI · Jukebox, Riffusion &amp; Suno generate audio directly.
+  </p>
+</section>
+
 <!-- ===================== OVERVIEW ===================== -->
 <section>
   <h2>Three Paradigms</h2>
   <div class="three-col" style="margin-top:1em;text-align:center;font-size:0.85em">
     <div class="card">
-      <div style="font-size:2.2em;line-height:1.2">📐</div>
+      <div class="paradigm-icon">📐</div>
       <h4>① Rule-Based</h4>
       <p>Musical knowledge written down as explicit rules.</p>
       <p style="margin-top:0.5em;color:#a5b4fc;font-size:0.8em">Harmonisers · Counterpoint · L-systems</p>
     </div>
     <div class="card">
-      <div style="font-size:2.2em;line-height:1.2">🧠</div>
+      <div class="paradigm-icon">🧠</div>
       <h4>② Learning</h4>
       <p>Models <em>learn</em> musical style from data.</p>
       <p style="margin-top:0.5em;color:#fcd34d;font-size:0.8em">Markov chains · Neural nets · Transformers</p>
     </div>
     <div class="card">
-      <div style="font-size:2.2em;line-height:1.2">🧬</div>
+      <div class="paradigm-icon">🧬</div>
       <h4>③ Evolutionary</h4>
       <p>Melodies <em>evolve</em> by selection and mutation.</p>
       <p style="margin-top:0.5em;color:#86efac;font-size:0.8em">Genetic algorithms · GenJam · Co-evolution</p>
     </div>
   </div>
-  <p style="font-size:0.65em;color:#475569;margin-top:1.2em">
+  <p class="footnote" style="font-size:0.65em;margin-top:1.2em">
     Each chapter starts simple and gets progressively more advanced —
     press <strong>↓</strong> to go deeper, or <strong>→</strong> to skip ahead
   </p>
@@ -244,7 +319,7 @@
   <section class="section-header">
     <div class="section-number">01</div>
     <h2>Rule-Based Approaches</h2>
-    <p style="color:#94a3b8;font-size:0.85em">Algorithmic Composition &amp; Music Theory as Code</p>
+    <p class="sub sub--lg">Algorithmic Composition &amp; Music Theory as Code</p>
     <span class="badge badge-rule">Rule-Based</span>
   </section>
 
@@ -259,9 +334,14 @@
       <li><span class="year">1994</span><span class="event"><strong>Max/MSP</strong>. Visual dataflow patching for real-time rule-based processing.</span></li>
       <li><span class="year">Now</span><span class="event"><strong>Live coding</strong> (Sonic Pi, TidalCycles). Rules written as code, executed in real-time on stage.</span></li>
     </ul>
+    <p class="footnote">
+      🎧 <a href="https://www.youtube.com/results?search_query=illiac+suite" target="_blank">Listen to the Illiac Suite</a>
+      — the 1957 computer quartet still sounds surprisingly modern.
+    </p>
     <aside class="notes">
       Emphasise that rule-based systems are still widely used in live performance and
       interactive installations. They are the foundation that learning-based systems try to improve on.
+      Play 30 seconds of the Illiac Suite if there is time.
     </aside>
   </section>
 
@@ -283,7 +363,7 @@
         <tr><td>B</td><td>vii°</td><td>B dim</td><td>diminished</td><td>B – D – F</td></tr>
       </tbody>
     </table>
-    <p style="font-size:0.7em;color:#475569;margin-top:0.5em">
+    <p class="footnote">
       Rule: <code>chord_notes = scale_degree_intervals + played_root</code>
     </p>
   </section>
@@ -291,7 +371,7 @@
   <!-- 1.4b Circle of Fifths (Issue #12) -->
   <section>
     <h2>Circle of Fifths</h2>
-    <p style="font-size:0.78em;color:#94a3b8;margin-bottom:0.8em">
+    <p class="sub" style="margin-bottom:0.8em">
       Highlights update from the Key/Mode selector in the Chord Harmoniser demo.
     </p>
     <div class="two-col" style="align-items:center">
@@ -311,7 +391,7 @@
           <h4>Diatonic chords</h4>
           <p id="cof-chords" style="margin-top:0.2em">I ii iii IV V vi vii°</p>
         </div>
-        <p style="font-size:0.7em;color:#475569;margin-top:0.6em">
+        <p class="footnote">
           Tip: try switching to Lydian/Phrygian/Locrian to see how the chord qualities change.
         </p>
       </div>
@@ -321,13 +401,13 @@
   <!-- 1.5 DEMO: Chord Harmoniser -->
   <section data-demo="rule-based">
     <h2><span class="badge badge-demo">Demo</span> Chord Harmoniser</h2>
-    <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.6em">
+    <p class="sub-sm">
       Play any note on your MIDI keyboard (or use Z–M keys). The algorithm adds the diatonic chord instantly.
     </p>
 
     <div class="demo-panel">
       <div class="demo-controls">
-        <label style="font-size:0.82em;color:#94a3b8">Key:</label>
+        <label class="sub">Key:</label>
         <select id="rb-key">
           <option value="0">C</option><option value="2">D</option>
           <option value="4">E</option><option value="5">F</option>
@@ -336,7 +416,7 @@
           <option value="3">D#</option><option value="6">F#</option>
           <option value="8">G#</option><option value="10">A#</option>
         </select>
-        <label style="font-size:0.82em;color:#94a3b8">Mode:</label>
+        <label class="sub">Mode:</label>
         <select id="rb-mode">
           <option value="major">Major</option>
           <option value="minor">Natural Minor</option>
@@ -350,25 +430,25 @@
           <option value="wholeTone">Whole Tone</option>
           <option value="octatonic">Octatonic (diminished)</option>
         </select>
-        <label style="font-size:0.82em;color:#94a3b8">Inversion:</label>
+        <label class="sub">Inversion:</label>
         <select id="rb-inversion">
           <option value="0">Root</option>
           <option value="1">1st</option>
           <option value="2">2nd</option>
         </select>
-        <label style="font-size:0.82em;color:#94a3b8">Accomp:</label>
+        <label class="sub">Accomp:</label>
         <select id="rb-accomp">
           <option value="off">Off</option>
           <option value="on">On</option>
         </select>
-        <label style="font-size:0.82em;color:#94a3b8">Pattern:</label>
+        <label class="sub">Pattern:</label>
         <select id="rb-pattern">
           <option value="block">Block</option>
           <option value="alberti">Alberti</option>
           <option value="walking">Walking</option>
           <option value="stride">Stride</option>
         </select>
-        <label style="font-size:0.82em;color:#94a3b8">Bass split:</label>
+        <label class="sub">Bass split:</label>
         <select id="rb-split">
           <option value="48">C3</option>
           <option value="50">D3</option>
@@ -395,7 +475,7 @@
         </div>
       </div>
 
-      <p style="font-size:0.7em;color:#475569;margin-top:0.5em">
+      <p class="footnote">
         💡 Keyboard shortcut: Z=C4, S=C#, X=D … ↑/↓ = octave shift
       </p>
     </div>
@@ -444,11 +524,11 @@
   <!-- 1.7 Bach's Counterpoint Rules -->
   <section>
     <h2>Bach's Voice-Leading Rules</h2>
-    <p style="font-size:0.8em;color:#94a3b8">Rules that governed 18th-century counterpoint — and still guide AI music systems today</p>
+    <p class="sub">Rules that governed 18th-century counterpoint — and still guide AI music systems today</p>
     <div class="two-col" style="margin-top:0.8em">
       <div>
         <h3>Forbidden</h3>
-        <ul style="font-size:0.78em;line-height:1.8">
+        <ul class="list-airy" style="font-size:0.78em">
           <li>Parallel perfect fifths or octaves</li>
           <li>Hidden fifths / octaves in outer voices</li>
           <li>Augmented intervals (melodically)</li>
@@ -458,7 +538,7 @@
       </div>
       <div>
         <h3>Preferred</h3>
-        <ul style="font-size:0.78em;line-height:1.8">
+        <ul class="list-airy" style="font-size:0.78em">
           <li>Step-wise (conjunct) motion</li>
           <li>Contrary / oblique motion between voices</li>
           <li>Resolve dissonances by step</li>
@@ -467,7 +547,7 @@
         </ul>
       </div>
     </div>
-    <p style="font-size:0.7em;color:#475569;margin-top:0.8em">
+    <p class="footnote">
       These rules can be encoded directly in software — or <em>learned</em> from data (Section 2).
     </p>
   </section>
@@ -475,7 +555,7 @@
   <!-- 1.7 DEMO: Species Counterpoint (Issue #7) -->
   <section data-demo="counterpoint">
     <h2><span class="badge badge-demo">Demo</span> First-Species Counterpoint</h2>
-    <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.6em">
+    <p class="sub-sm">
       Record a lower voice — the algorithm adds an upper voice following Bach's rules.
     </p>
     <div class="demo-panel">
@@ -492,16 +572,50 @@
         <div id="piano-cp"></div>
       </div>
 
-      <div style="font-size:0.75em;color:#94a3b8;margin:0.3em 0">Cantus firmus (purple):</div>
-      <div class="seed-notes-display" id="cp-cantus"><span style="color:#475569">No notes yet</span></div>
-      <div style="font-size:0.75em;color:#94a3b8;margin:0.3em 0">Counter-melody (cyan):</div>
-      <div class="seed-notes-display" id="cp-counter"><span style="color:#475569">—</span></div>
+      <div class="label">Cantus firmus (purple):</div>
+      <div class="seed-notes-display" id="cp-cantus"><span class="placeholder">No notes yet</span></div>
+      <div class="label">Counter-melody (cyan):</div>
+      <div class="seed-notes-display" id="cp-counter"><span class="placeholder">—</span></div>
 
       <p class="status-line" id="cp-status">Record a cantus firmus or load the Bach seed.</p>
     </div>
     <aside class="notes">
       Demonstrate rule encoding: parallel fifths are forbidden, contrary motion is preferred.
       Generate, then play both voices together.
+    </aside>
+  </section>
+
+  <!-- 1.9 Live coding (advanced) -->
+  <section>
+    <h2>Going Deeper: Live Coding</h2>
+    <p class="sub">Rules written as code — and rewritten live, on stage</p>
+    <div class="two-col" style="margin-top:0.6em;align-items:center">
+      <div>
+        <pre><code class="language-ruby" data-trim>
+live_loop :melody do
+  use_synth :piano
+  play scale(:c4, :major).choose
+  sleep [0.25, 0.5].choose
+end
+        </code></pre>
+        <p class="footnote" style="font-size:0.65em;margin-top:0.4em">Sonic Pi — four lines of rules = endless melody</p>
+      </div>
+      <div style="font-size:0.8em">
+        <div class="card">
+          <h4>Try it</h4>
+          <p><a href="https://strudel.cc" target="_blank">strudel.cc</a> runs in the browser —
+             <a href="https://sonic-pi.net" target="_blank">Sonic Pi</a> and
+             <a href="https://tidalcycles.org" target="_blank">TidalCycles</a> on your laptop.</p>
+        </div>
+        <div class="card">
+          <h4>Algoraves</h4>
+          <p>Club nights where the code is projected while people dance to it.</p>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">
+      If online, open strudel.cc and evaluate a one-liner live — instant credibility.
+      Point out this is still rule-based AI: no data, no training, pure algorithm.
     </aside>
   </section>
 
@@ -516,7 +630,7 @@
   <section class="section-header">
     <div class="section-number">02</div>
     <h2>Learning-Based Approaches</h2>
-    <p style="color:#94a3b8;font-size:0.85em">Statistical Models &amp; Neural Networks</p>
+    <p class="sub sub--lg">Statistical Models &amp; Neural Networks</p>
     <span class="badge badge-neural">Learning</span>
   </section>
 
@@ -538,7 +652,7 @@
         <div class="flow-box">🎵 Music</div>
       </div>
     </div>
-    <p style="font-size:0.8em;color:#94a3b8;margin-top:1.4em">
+    <p class="sub" style="margin-top:1.4em">
       Instead of <em>programming</em> "no parallel fifths", we show the model
       thousands of Bach chorales — it discovers the rule itself.
     </p>
@@ -547,7 +661,7 @@
   <!-- 2.3 Markov chains -->
   <section>
     <h2>Step 1 — Markov Chains</h2>
-    <p style="font-size:0.8em;color:#94a3b8">The simplest statistical music model</p>
+    <p class="sub">The simplest statistical music model</p>
     <div class="two-col" style="margin-top:0.5em;align-items:center">
       <div>
         <blockquote style="font-size:0.82em;border-left:3px solid #7c3aed;padding-left:0.8em;color:#c4b5fd">
@@ -587,7 +701,7 @@
           <circle class="node" cx="348" cy="254" r="27"></circle>
           <text x="348" y="262" font-size="20" font-weight="700" text-anchor="middle">E</text>
         </svg>
-        <p style="font-size:0.65em;color:#475569;text-align:center;margin-top:0.2em">
+        <p class="footnote" style="font-size:0.65em;text-align:center;margin-top:0.2em">
           Transitions after G, counted from Bach (C major). Thicker arrow = more likely.
         </p>
       </div>
@@ -597,7 +711,7 @@
   <!-- 2.4 DEMO: Markov -->
   <section data-demo="markov">
     <h2><span class="badge badge-demo">Demo</span> Markov Continuation — Bach Style</h2>
-    <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.6em">
+    <p class="sub-sm">
       Transition probabilities extracted from Bach's C-major Prelude BWV 846.
     </p>
     <div class="demo-panel">
@@ -615,7 +729,7 @@
 
       <p class="status-line" id="markov-status">Click <b>Record</b> and play a melody, or use Bach Seed.</p>
 
-      <div style="font-size:0.75em;color:#94a3b8;margin:0.3em 0">Notes (orange = seed · purple = generated):</div>
+      <div class="label">Notes (orange = seed · purple = generated):</div>
       <div class="markov-display" id="markov-notes"></div>
     </div>
     <aside class="notes">
@@ -627,7 +741,7 @@
   <!-- 2.5 Neural Networks -->
   <section>
     <h2>Step 2 — Neural Networks</h2>
-    <p style="font-size:0.8em;color:#94a3b8">Going deeper than Markov chains — four families</p>
+    <p class="sub">Going deeper than Markov chains — four families</p>
     <div class="two-col" style="margin-top:0.4em;font-size:0.8em">
       <div>
         <div class="card">
@@ -650,7 +764,7 @@
         </div>
       </div>
     </div>
-    <p style="font-size:0.7em;color:#475569;margin-top:0.6em">
+    <p class="footnote">
       Let's hear one first — then look inside the two families that dominate today.
     </p>
   </section>
@@ -658,7 +772,7 @@
   <!-- 2.6 DEMO: Magenta Neural Continuation -->
   <section data-demo="neural">
     <h2><span class="badge badge-demo">Demo</span> Neural Melody Continuation</h2>
-    <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.4em">
+    <p class="sub-sm">
       Google Magenta's <em>melody_rnn</em> (LSTM) runs entirely in the browser.
     </p>
     <div class="demo-panel">
@@ -669,7 +783,7 @@
         <button id="nn-continue" class="btn btn-primary" disabled>▶ Continue</button>
         <button id="nn-bach"     class="btn btn-outline">🎼 Bach Seed</button>
         <button id="nn-midi"     class="btn btn-outline btn-sm">💾 MIDI</button>
-        <label style="font-size:0.8em;color:#94a3b8">Creativity:</label>
+        <label class="sub">Creativity:</label>
         <input id="nn-temperature" type="range" min="0.5" max="2.0" step="0.1" value="1.1"
                style="width:80px" title="Temperature (0.5=conservative, 2.0=wild)" />
       </div>
@@ -681,11 +795,11 @@
       <p class="status-line" id="nn-status">
         Click <b>Load Model</b> (requires internet). Model ~4 MB.
       </p>
-      <div style="font-size:0.75em;color:#94a3b8;margin:0.2em 0">Seed notes:</div>
+      <div class="label">Seed notes:</div>
       <div class="seed-notes-display" id="nn-seed">
-        <span style="color:#475569">No notes yet</span>
+        <span class="placeholder">No notes yet</span>
       </div>
-      <div style="font-size:0.75em;color:#94a3b8;margin:0.2em 0 0">AI continuation:</div>
+      <div class="label">AI continuation:</div>
       <div class="seed-notes-display" id="nn-continuation"></div>
     </div>
     <aside class="notes">
@@ -697,7 +811,7 @@
   <!-- 2.7b DEMO: Piano Genie (Issue #10) -->
   <section data-demo="piano-genie">
     <h2><span class="badge badge-demo">Demo</span> Piano Genie</h2>
-    <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.6em">
+    <p class="sub-sm">
       8 coarse buttons map to expressive piano notes via a latent space (after Magenta's Piano Genie).
     </p>
     <div class="demo-panel">
@@ -719,10 +833,57 @@
     </div>
   </section>
 
-  <!-- 2.8 Transformers explained -->
+  <!-- 2.8 Music as tokens -->
+  <section>
+    <h2>How Music Becomes "Text"</h2>
+    <p class="sub">
+      Big language-style models read <strong>tokens</strong> — so we turn notes into a vocabulary.
+    </p>
+    <svg class="illustration" width="740" height="150" viewBox="0 0 740 150" role="img"
+         aria-label="A piano roll converted into a sequence of text-like tokens">
+      <defs>
+        <marker id="tk-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted)"></path>
+        </marker>
+      </defs>
+      <g transform="translate(0,15)">
+        <rect class="panel" x="0" y="0" width="200" height="110" rx="8"></rect>
+        <rect x="15"  y="82" width="40" height="11" rx="3" fill="var(--primary)"></rect>
+        <rect x="60"  y="64" width="40" height="11" rx="3" fill="var(--primary)"></rect>
+        <rect x="105" y="46" width="40" height="11" rx="3" fill="var(--primary)"></rect>
+        <rect x="150" y="28" width="40" height="11" rx="3" fill="var(--primary)"></rect>
+        <text class="lbl" x="100" y="128" font-size="13" text-anchor="middle">piano roll</text>
+      </g>
+      <line x1="215" y1="70" x2="255" y2="70" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#tk-arrow)"></line>
+      <g font-family="monospace" font-size="13" text-anchor="middle" transform="translate(0,15)">
+        <rect class="box" x="270" y="25" width="100" height="34" rx="8"></rect>
+        <text x="320" y="47">NOTE C4</text>
+        <rect class="box" x="382" y="25" width="80" height="34" rx="8"></rect>
+        <text x="422" y="47">DUR ¼</text>
+        <rect class="box" x="474" y="25" width="100" height="34" rx="8"></rect>
+        <text x="524" y="47">NOTE E4</text>
+        <rect class="box" x="586" y="25" width="80" height="34" rx="8"></rect>
+        <text x="626" y="47">DUR ¼</text>
+        <rect class="box" x="270" y="70" width="100" height="34" rx="8"></rect>
+        <text x="320" y="92">NOTE G4</text>
+        <rect class="box" x="382" y="70" width="80" height="34" rx="8"></rect>
+        <text x="422" y="92">DUR ¼</text>
+        <rect class="box-main" x="474" y="70" width="100" height="34" rx="8"></rect>
+        <text class="on-main" x="524" y="92">NOTE C5</text>
+        <text class="lbl" x="470" y="128" font-size="13">a "sentence" of music</text>
+      </g>
+    </svg>
+    <p class="sub-note">
+      Same trick as ChatGPT's words: a melody becomes a sentence, and
+      composing becomes <em>predicting the next token</em>.
+    </p>
+  </section>
+
+  <!-- 2.9 Transformers explained -->
   <section>
     <h2>Inside a Transformer</h2>
-    <p style="font-size:0.8em;color:#94a3b8">
+    <p class="sub">
       To predict the next note, <strong>attention</strong> weighs every previous note — near and far.
     </p>
     <svg class="illustration" width="660" height="226" viewBox="0 0 760 260" role="img"
@@ -759,10 +920,55 @@
     </aside>
   </section>
 
-  <!-- 2.9 Diffusion explained -->
+  <!-- 2.10 Sampling & temperature -->
+  <section>
+    <h2>Sampling &amp; Temperature</h2>
+    <p class="sub">
+      The <strong>Creativity</strong> slider in our demo is <em>temperature</em> — it reshapes the next-note probabilities.
+    </p>
+    <svg class="illustration" width="700" height="190" viewBox="0 0 700 190" role="img"
+         aria-label="Two probability distributions: low temperature is peaked, high temperature is flat">
+      <g transform="translate(30,10)">
+        <rect class="panel" x="0" y="0" width="280" height="130" rx="8"></rect>
+        <rect x="30"  y="20"  width="36" height="95" rx="3" fill="var(--secondary)"></rect>
+        <rect x="80"  y="95"  width="36" height="20" rx="3" fill="var(--secondary)" opacity="0.55"></rect>
+        <rect x="130" y="103" width="36" height="12" rx="3" fill="var(--secondary)" opacity="0.55"></rect>
+        <rect x="180" y="107" width="36" height="8"  rx="3" fill="var(--secondary)" opacity="0.55"></rect>
+        <rect x="230" y="110" width="36" height="5"  rx="3" fill="var(--secondary)" opacity="0.55"></rect>
+        <text x="48"  y="150" font-size="13" text-anchor="middle">A</text>
+        <text x="98"  y="150" font-size="13" text-anchor="middle">F</text>
+        <text x="148" y="150" font-size="13" text-anchor="middle">E</text>
+        <text x="198" y="150" font-size="13" text-anchor="middle">C</text>
+        <text x="248" y="150" font-size="13" text-anchor="middle">D</text>
+        <text class="lbl" x="140" y="175" font-size="14" text-anchor="middle">low T — safe, repetitive</text>
+      </g>
+      <g transform="translate(390,10)">
+        <rect class="panel" x="0" y="0" width="280" height="130" rx="8"></rect>
+        <rect x="30"  y="70" width="36" height="45" rx="3" fill="var(--accent)"></rect>
+        <rect x="80"  y="78" width="36" height="37" rx="3" fill="var(--accent)" opacity="0.75"></rect>
+        <rect x="130" y="84" width="36" height="31" rx="3" fill="var(--accent)" opacity="0.75"></rect>
+        <rect x="180" y="88" width="36" height="27" rx="3" fill="var(--accent)" opacity="0.75"></rect>
+        <rect x="230" y="92" width="36" height="23" rx="3" fill="var(--accent)" opacity="0.75"></rect>
+        <text x="48"  y="150" font-size="13" text-anchor="middle">A</text>
+        <text x="98"  y="150" font-size="13" text-anchor="middle">F</text>
+        <text x="148" y="150" font-size="13" text-anchor="middle">E</text>
+        <text x="198" y="150" font-size="13" text-anchor="middle">C</text>
+        <text x="248" y="150" font-size="13" text-anchor="middle">D</text>
+        <text class="lbl" x="140" y="175" font-size="14" text-anchor="middle">high T — adventurous, chaotic</text>
+      </g>
+    </svg>
+    <p class="sub-note">
+      The model never picks one "right" note — it rolls weighted dice. Temperature loads the dice.
+    </p>
+    <aside class="notes">
+      Go back to the neural demo and generate twice at T=0.5 and T=1.9 to make this audible.
+    </aside>
+  </section>
+
+  <!-- 2.11 Diffusion explained -->
   <section>
     <h2>Inside a Diffusion Model</h2>
-    <p style="font-size:0.8em;color:#94a3b8">
+    <p class="sub">
       Generate audio by learning to <strong>remove noise</strong>, step by step.
     </p>
     <svg class="illustration" width="700" height="130" viewBox="0 0 700 130" role="img"
@@ -802,7 +1008,7 @@
       <div class="card"><h4>Generation</h4><p>Start from random noise, denoise ~50 steps.</p></div>
       <div class="card"><h4>Used by</h4><p>Riffusion, Stable Audio, AudioCraft.</p></div>
     </div>
-    <p style="font-size:0.7em;color:#475569;margin-top:0.5em">
+    <p class="footnote">
       Trade-off vs transformers: superb audio fidelity, but many steps → slower, harder in real-time.
     </p>
     <aside class="notes">
@@ -811,7 +1017,31 @@
     </aside>
   </section>
 
-  <!-- 2.10 Landmark systems -->
+  <!-- 2.12 RLHF (advanced) -->
+  <section>
+    <h2>Frontier: Learning From Human Feedback</h2>
+    <p class="sub">
+      Imitating data teaches <em>style</em> — feedback teaches <em>taste</em>.
+    </p>
+    <div class="flow-row" style="margin-top:1.2em">
+      <div class="flow-box">🎼 Generate two clips</div><span class="flow-arrow">→</span>
+      <div class="flow-box">🙋 Human picks the better one</div><span class="flow-arrow">→</span>
+      <div class="flow-box">🏆 Reward model learns "taste"</div><span class="flow-arrow">→</span>
+      <div class="flow-box">🔁 Fine-tune the generator</div>
+    </div>
+    <div class="two-col" style="margin-top:1em;font-size:0.8em">
+      <div class="card">
+        <h4>Same recipe as ChatGPT</h4>
+        <p>RLHF is how chatbots got helpful — music models are next.</p>
+      </div>
+      <div class="card">
+        <h4>Sound familiar?</h4>
+        <p>It's GenJam's audience-as-fitness idea (1994) — at industrial scale. Chapter 03 saw it coming.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2.13 Landmark systems -->
   <section>
     <h2>Landmark AI Music Systems</h2>
     <ul class="timeline">
@@ -856,7 +1086,7 @@
         <p>Harmonise like Bach. <a href="https://g.co/arts/BachDoodle" target="_blank">g.co/arts</a></p>
       </div>
     </div>
-    <p style="font-size:0.7em;color:#475569;margin-top:0.8em">
+    <p class="footnote">
       For full songs from a text prompt, try <a href="https://suno.com" target="_blank">suno.com</a>
       or <a href="https://udio.com" target="_blank">udio.com</a> live with the audience.
     </p>
@@ -873,7 +1103,7 @@
   <section class="section-header">
     <div class="section-number">03</div>
     <h2>Evolutionary Approaches</h2>
-    <p style="color:#94a3b8;font-size:0.85em">Composition by Natural Selection</p>
+    <p class="sub sub--lg">Composition by Natural Selection</p>
     <span class="badge badge-evo">Evolutionary</span>
   </section>
 
@@ -883,7 +1113,7 @@
     <div class="two-col">
       <div>
         <h3 style="font-size:1em">Biological metaphor</h3>
-        <ul style="font-size:0.72em;line-height:1.7">
+        <ul class="list-compact">
           <li><strong>Melody</strong> = chromosome · <strong>note</strong> = gene</li>
           <li><strong>Population</strong> = 20–100 candidate melodies</li>
           <li><strong>Fitness</strong> = "how musical is this melody?"</li>
@@ -893,16 +1123,16 @@
       </div>
       <div>
         <h3 style="font-size:1em">The cycle</h3>
-        <div style="text-align:center;font-size:0.7em;line-height:1.5;color:var(--text-muted)">
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:0.25em;margin:0.15em 0;color:var(--text-main)">🎲 Random population</div>
+        <div class="cycle">
+          <div class="cycle-box">🎲 Random population</div>
           <div>↓</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:0.25em;margin:0.15em 0;color:var(--text-main)">📊 Evaluate fitness</div>
+          <div class="cycle-box">📊 Evaluate fitness</div>
           <div>↓</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:0.25em;margin:0.15em 0;color:var(--text-main)">🏆 Select best</div>
+          <div class="cycle-box">🏆 Select best</div>
           <div>↓</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:0.25em;margin:0.15em 0;color:var(--text-main)">🧬 Crossover + Mutate</div>
+          <div class="cycle-box">🧬 Crossover + Mutate</div>
           <div>↓ repeat 50–500 generations</div>
-          <div style="background:#064e3b;border-radius:6px;padding:0.25em;margin:0.15em 0;color:#a7f3d0">🎶 Best melody</div>
+          <div class="cycle-box cycle-box--final">🎶 Best melody</div>
         </div>
       </div>
     </div>
@@ -911,12 +1141,12 @@
   <!-- 3.3 Fitness functions -->
   <section>
     <h2>Designing a Fitness Function</h2>
-    <p style="font-size:0.8em;color:#94a3b8">What makes a melody "good"? — the hardest problem in evolutionary music</p>
+    <p class="sub">What makes a melody "good"? — the hardest problem in evolutionary music</p>
     <div class="two-col" style="margin-top:0.6em">
       <div>
         <div class="card">
           <h4>Objective (rule-based)</h4>
-          <ul style="font-size:0.72em;line-height:1.7">
+          <ul class="list-compact">
             <li>✅ Step-wise motion, arch shape</li>
             <li>✅ Stay within ~1.5 octaves</li>
             <li>✅ End on tonic or fifth</li>
@@ -927,7 +1157,7 @@
       <div>
         <div class="card">
           <h4>Subjective (interactive EA)</h4>
-          <ul style="font-size:0.72em;line-height:1.7">
+          <ul class="list-compact">
             <li>👂 Humans rate melodies 1–10</li>
             <li>🎭 GenJam: live audience feedback</li>
             <li>⚠ Slow, and taste keeps shifting</li>
@@ -935,7 +1165,7 @@
         </div>
       </div>
     </div>
-    <p style="font-size:0.75em;color:#94a3b8;margin-top:0.8em">
+    <p class="sub-note">
       💡 <strong>Combined:</strong> rules + a learned "beauty scorer" — best of both worlds.
     </p>
   </section>
@@ -943,7 +1173,7 @@
   <!-- 3.4 DEMO: Evolutionary Composer -->
   <section data-demo="evo">
     <h2><span class="badge badge-demo">Demo</span> Genetic Algorithm Melody Evolution</h2>
-    <p style="font-size:0.75em;color:#94a3b8;margin-bottom:0.5em">
+    <p class="sub-sm">
       Population of 24 melodies. Switch to <strong>Audience (IGA)</strong> mode to rate melodies like GenJam.
     </p>
     <div class="demo-panel">
@@ -952,7 +1182,7 @@
         <button id="evo-stop"   class="btn btn-danger"  disabled>⏹ Stop</button>
         <button id="evo-play"   class="btn btn-primary">🔊 Play Best</button>
         <button id="evo-midi"   class="btn btn-outline btn-sm">💾 MIDI</button>
-        <label style="font-size:0.8em;color:#94a3b8">Fitness:</label>
+        <label class="sub">Fitness:</label>
         <select id="evo-fitness-mode">
           <option value="rules">Automated rules</option>
           <option value="audience">Audience (IGA)</option>
@@ -960,7 +1190,7 @@
       </div>
 
       <div id="evo-rating" class="demo-controls" style="display:none;margin-top:0.4em">
-        <span style="font-size:0.8em;color:#94a3b8">Rate melody:</span>
+        <span class="sub">Rate melody:</span>
         <button class="btn btn-outline btn-sm evo-rate" data-stars="1">★</button>
         <button class="btn btn-outline btn-sm evo-rate" data-stars="2">★★</button>
         <button class="btn btn-outline btn-sm evo-rate" data-stars="3">★★★</button>
@@ -983,9 +1213,9 @@
         </div>
       </div>
 
-      <div style="font-size:0.72em;color:#94a3b8;margin:0.2em 0">Best melody (piano roll):</div>
+      <div class="label">Best melody (piano roll):</div>
       <canvas id="evo-roll"  class="evo-canvas" width="640" height="80"></canvas>
-      <div style="font-size:0.72em;color:#94a3b8;margin:0.2em 0">Fitness over generations (green = best, cyan = avg):</div>
+      <div class="label">Fitness over generations (green = best, cyan = avg):</div>
       <canvas id="evo-chart" class="evo-canvas" width="640" height="60"></canvas>
 
       <p class="status-line" id="evo-status">Click Start to watch the evolution unfold.</p>
@@ -1007,6 +1237,34 @@
       <li><span class="year">2018</span><span class="event"><strong>CMA-ES</strong> — covariance matrix adaptation for polyphonic music.</span></li>
       <li><span class="year">Now</span><span class="event">Hybrids: GA fitness from neural style embeddings (CLIP-like music critics).</span></li>
     </ul>
+  </section>
+
+  <!-- 3.6 Beyond fitness (advanced) -->
+  <section>
+    <h2>Going Deeper: Beyond Fitness</h2>
+    <p class="sub">When "score it and pick the best" isn't enough</p>
+    <div class="two-col" style="margin-top:0.6em;font-size:0.8em">
+      <div>
+        <div class="card">
+          <h4>🗺 Novelty search</h4>
+          <p>Reward being <em>different</em> instead of "good" — stops every melody converging on the same safe tune.</p>
+        </div>
+        <div class="card">
+          <h4>🏅 Quality–diversity</h4>
+          <p>Keep the best melody <em>per niche</em> (calm, jazzy, chaotic…), not one global winner.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h4>⚔️ Co-evolution</h4>
+          <p>Melodies evolve against critics that also evolve — an arms race. Sound familiar? GANs rediscovered this.</p>
+        </div>
+        <div class="card">
+          <h4>🔗 The loop closes</h4>
+          <p>Modern systems: evolutionary search guided by neural critics, tuned by human feedback — all three paradigms at once.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
 </section><!-- /section 3 -->
@@ -1069,13 +1327,38 @@
     </table>
   </section>
 
+  <!-- Decision guide -->
+  <section>
+    <h2>Which Approach Should You Use?</h2>
+    <div style="margin-top:1.2em">
+      <div class="flow-row">
+        <div class="flow-box flow-box--wide">❓ Must explain every note? Real-time on stage? No data?</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box" style="border-color:#7c3aed">📐 <strong>Rule-based</strong></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-box flow-box--wide">❓ Lots of examples of the style you want to imitate?</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box" style="border-color:#f97316">🧠 <strong>Learning-based</strong></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-box flow-box--wide">❓ Can you <em>score</em> quality — and want surprises?</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box" style="border-color:#10b981">🧬 <strong>Evolutionary</strong></div>
+      </div>
+    </div>
+    <p style="font-size:0.75em;color:#94a3b8;margin-top:1.2em">
+      In practice, strong systems mix all three: rules for structure, learning for style, search for surprise.
+    </p>
+  </section>
+
   <!-- Current state -->
   <section>
     <h2>Where Are We Now? (2026)</h2>
     <div class="two-col">
       <div>
         <h3>What works well</h3>
-        <ul style="font-size:0.8em;line-height:1.8">
+        <ul class="list-airy">
           <li>Full songs from text prompts (Suno, Udio)</li>
           <li>Style imitation &amp; genre blending</li>
           <li>Real-time MIDI assistance (Magenta)</li>
@@ -1085,7 +1368,7 @@
       </div>
       <div>
         <h3>Open challenges</h3>
-        <ul style="font-size:0.8em;line-height:1.8">
+        <ul class="list-airy">
           <li>Long-form structure &amp; musical coherence</li>
           <li>Live improvisation partner</li>
           <li>Copyright, attribution, consent</li>
@@ -1096,13 +1379,49 @@
     </div>
   </section>
 
+  <!-- Ethics -->
+  <section>
+    <h2>Ethics: Three Real Cases</h2>
+    <div class="three-col" style="margin-top:0.8em;font-size:0.85em">
+      <div class="card">
+        <h4>🎤 The fake Drake</h4>
+        <p>"Heart on My Sleeve" (2023) — an AI voice-clone track went viral, then was pulled from streaming. Who owns a voice?</p>
+      </div>
+      <div class="card">
+        <h4>⚖️ Labels vs Suno &amp; Udio</h4>
+        <p>Major record labels sued both companies (2024) over training on copyrighted recordings.</p>
+      </div>
+      <div class="card">
+        <h4>🎨 Consent &amp; credit</h4>
+        <p>Most training data was never opted in. How should artists be credited — and paid?</p>
+      </div>
+    </div>
+    <p class="sub-note">
+      These are exactly the questions <a href="https://mishmash.no/" target="_blank">MishMash</a> researches.
+    </p>
+  </section>
+
+  <!-- Discussion -->
+  <section class="title-slide">
+    <h2 style="margin-top:0.8em">Discuss</h2>
+    <div style="margin-top:1.5em;font-size:0.95em;line-height:1.6">
+      <p style="margin:0.8em 0">💬 If you prompt it, did <em>you</em> compose it?</p>
+      <p style="margin:0.8em 0">💬 Would you pay for AI music? Perform with it?</p>
+      <p style="margin:0.8em 0">💬 What should a machine <em>never</em> do in music?</p>
+    </div>
+    <aside class="notes">
+      Give pairs two minutes per question, then collect answers. Works for both beginner
+      and expert audiences — experts can be pushed on the training-data question.
+    </aside>
+  </section>
+
   <!-- Resources -->
   <section>
     <h2>Resources &amp; Further Reading</h2>
     <div class="three-col" style="font-size:0.65em">
       <div>
         <h3 style="font-size:1.2em">Tools</h3>
-        <ul style="line-height:1.9">
+        <ul class="list-links">
           <li><a href="https://magenta.tensorflow.org" target="_blank">Magenta</a></li>
           <li><a href="https://tonejs.github.io" target="_blank">Tone.js</a></li>
           <li><a href="https://www.ableton.com/max-for-live/" target="_blank">Max for Live</a></li>
@@ -1112,7 +1431,7 @@
       </div>
       <div>
         <h3 style="font-size:1.2em">Papers</h3>
-        <ul style="line-height:1.9">
+        <ul class="list-links">
           <li>Briot et al. (2020) — <em>Deep Learning for Music Generation</em></li>
           <li>Herremans et al. — <em>Taxonomy of Music Generation Systems</em></li>
           <li>Biles (1994) — <em>GenJam</em></li>
@@ -1121,7 +1440,7 @@
       </div>
       <div>
         <h3 style="font-size:1.2em">Demos</h3>
-        <ul style="line-height:1.9">
+        <ul class="list-links">
           <li><a href="https://g.co/arts/BachDoodle" target="_blank">Bach Doodle</a></li>
           <li><a href="https://piano-genie.glitch.me" target="_blank">Piano Genie</a></li>
           <li><a href="https://huggingface.co/spaces/facebook/MusicGen" target="_blank">MusicGen</a></li>
@@ -1137,7 +1456,7 @@
     <h2 style="margin-top:1.5em">Thank You!</h2>
     <p style="color:#94a3b8;font-size:0.85em;margin-top:0.5em">
       Slides + interactive demos:<br>
-      <a href="https://alexarje.github.io/Music-AI-introduction" target="_blank" style="color:#06b6d4">
+      <a href="https://alexarje.github.io/Music-AI-introduction" target="_blank">
         alexarje.github.io/Music-AI-introduction
       </a>
     </p>

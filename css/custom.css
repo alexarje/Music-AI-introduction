@@ -2,6 +2,25 @@
    Music AI Introduction — Custom Reveal.js Theme Extension
    ============================================================ */
 
+/* Inter variable font (weights 100-900), as used for headings on
+   mishmash.no. Self-hosted so the deck works offline. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(../fonts/inter-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(../fonts/inter-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 :root {
   --primary:    #7c3aed;
   --secondary:  #06b6d4;
@@ -59,6 +78,7 @@ body.dark-theme {
 }
 
 .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: 'Inter', 'Raleway', Arial, sans-serif;
   text-transform: none;
   letter-spacing: -0.02em;
   font-weight: 700;
@@ -113,6 +133,23 @@ body.dark-theme {
   align-items: start;
 }
 
+/* ---- Slide text utilities ---- */
+/* Fixed colors (not theme vars): slides use the same muted blue-grey in both themes */
+.sub       { font-size: 0.8em;  color: #94a3b8; }            /* slide subtitle */
+.sub--lg   { font-size: 0.85em; }                            /* section-header subtitle */
+.sub-sm    { font-size: 0.75em; color: #94a3b8; margin-bottom: 0.6em; }  /* demo intro line */
+.sub-note  { font-size: 0.75em; color: #94a3b8; margin-top: 0.8em; }     /* closing remark */
+.label     { font-size: 0.75em; color: #94a3b8; margin: 0.3em 0; }       /* label above a display */
+.footnote  { font-size: 0.7em;  color: #475569; margin-top: 0.6em; }
+.hint      { font-size: 0.65em; color: #475569; margin-top: 2em; }       /* title-slide hint */
+.placeholder { color: #475569; }
+
+.list-airy    { font-size: 0.8em;  line-height: 1.8; }
+.list-compact { font-size: 0.72em; line-height: 1.7; }
+.list-links   { line-height: 1.9; }
+
+.paradigm-icon { font-size: 2.2em; line-height: 1.2; }
+
 /* ---- Flow diagrams ---- */
 .flow-row {
   display: flex;
@@ -131,6 +168,30 @@ body.dark-theme {
   text-align: center;
 }
 .flow-arrow { color: var(--text-muted); font-size: 1.1em; }
+.flow-box--wide { min-width: 24em; text-align: left; }
+.flow-sub { display: block; color: var(--text-muted); font-size: 0.85em; }
+.flow-row--compact .flow-box { font-size: 0.7em; }
+
+/* GA cycle diagram */
+.cycle {
+  text-align: center;
+  font-size: 0.7em;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.cycle-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.25em;
+  margin: 0.15em 0;
+  color: var(--text-main);
+}
+.cycle-box--final {
+  background: #064e3b;
+  border-color: transparent;
+  color: #a7f3d0;
+}
 
 /* ---- Inline SVG illustrations ---- */
 .illustration { display: block; margin: 0.6em auto; max-width: 100%; height: auto; }
